@@ -16,7 +16,7 @@ namespace MHL
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MLH());
+            Application.Run(new login());
         }
     }
 }
