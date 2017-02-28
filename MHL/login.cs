@@ -20,25 +20,20 @@ namespace MHL
 
         private void login_Load(object sender, EventArgs e)
         {
-
+            txtUserName.Focus();
         }
 
         private void metroButton2_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            MLH frm = new MLH();
-            {
-                frm.ShowDialog();                
-            }
             this.Close();
         }
 
         private void metroButton1_Click(object sender, EventArgs e)
         {
-            SqlConnection _sqlCon = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|dbFile\PWDB.mdf;Integrated Security=True;Connect Timeout=30");
-            SqlDataAdapter sda = new SqlDataAdapter();
-            DataTable dt = new DataTable();
             string Loginquery = ("Select TeacherLastName from PWDB where Email='" + txtUserName.Text.Trim() + "' and Password='" + txtPassword.Text.Trim() + "'");
+            SqlConnection _sqlCon = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|dbFile\PWDB.mdf;Integrated Security=True;Connect Timeout=30");            
+            DataTable dt = new DataTable();            
+            SqlDataAdapter sda = new SqlDataAdapter(Loginquery, _sqlCon);
             if (string.IsNullOrWhiteSpace(txtUserName.Text) || string.IsNullOrWhiteSpace(txtPassword.Text) ||
              txtUserName.Text == "Please Enter User Name" || txtPassword.Text == "Please Enter Password")
             {
@@ -50,16 +45,24 @@ namespace MHL
                 {
                     if (_sqlCon.State == ConnectionState.Closed)
                     {
-                        _sqlCon.Open();
-                        SqlCommand sqlCmd = new SqlCommand(Loginquery, _sqlCon);   
-                        sqlCmd.CommandType = CommandType.Text;
-                        sqlCmd.ExecuteNonQuery();
-
-                        sda.Fill(dt);
-                        //if(dt.Rows[0][0].ToString()=="Admin")
+                        _sqlCon.Open();           
+                        sda.Fill(dt);                                                 
                         if (dt.Rows.Count == 1)
                         {
-                            MessageBox.Show("login Sucsessful");
+                            MessageBox.Show("   Welcome " + dt.Rows[0][0].ToString(), "Murphy Login Helper");
+                            this.Hide();
+                            MLH frm = new MLH();
+                            {
+                                frm.ShowDialog();
+                            }
+                            this.Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Please check your credentials and try again!", "Failed to Login", MessageBoxButtons.OK,
+    MessageBoxIcon.Exclamation);
+                            txtPassword.Clear();
+                            txtPassword.Focus();
                         }
                     }
 
@@ -72,8 +75,7 @@ namespace MHL
                 finally
                 {
                     _sqlCon.Close();
-                }
-                this.Close();
+                }              
             }
         }
 

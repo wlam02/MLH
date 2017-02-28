@@ -42,7 +42,7 @@
             // 
             // 
             this.txtUserName.CustomButton.Image = null;
-            this.txtUserName.CustomButton.Location = new System.Drawing.Point(154, 1);
+            this.txtUserName.CustomButton.Location = new System.Drawing.Point(196, 1);
             this.txtUserName.CustomButton.Name = "";
             this.txtUserName.CustomButton.Size = new System.Drawing.Size(21, 21);
             this.txtUserName.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -50,8 +50,7 @@
             this.txtUserName.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.txtUserName.CustomButton.UseSelectable = true;
             this.txtUserName.CustomButton.Visible = false;
-            this.txtUserName.Lines = new string[] {
-        "Please Enter User Name"};
+            this.txtUserName.Lines = new string[0];
             this.txtUserName.Location = new System.Drawing.Point(132, 69);
             this.txtUserName.MaxLength = 32767;
             this.txtUserName.Name = "txtUserName";
@@ -63,7 +62,6 @@
             this.txtUserName.ShortcutsEnabled = true;
             this.txtUserName.Size = new System.Drawing.Size(218, 23);
             this.txtUserName.TabIndex = 0;
-            this.txtUserName.Text = "Please Enter User Name";
             this.txtUserName.UseSelectable = true;
             this.txtUserName.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtUserName.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
@@ -75,7 +73,7 @@
             // 
             // 
             this.txtPassword.CustomButton.Image = null;
-            this.txtPassword.CustomButton.Location = new System.Drawing.Point(154, 1);
+            this.txtPassword.CustomButton.Location = new System.Drawing.Point(196, 1);
             this.txtPassword.CustomButton.Name = "";
             this.txtPassword.CustomButton.Size = new System.Drawing.Size(21, 21);
             this.txtPassword.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -83,12 +81,11 @@
             this.txtPassword.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.txtPassword.CustomButton.UseSelectable = true;
             this.txtPassword.CustomButton.Visible = false;
-            this.txtPassword.Lines = new string[] {
-        "Please Enter Password"};
+            this.txtPassword.Lines = new string[0];
             this.txtPassword.Location = new System.Drawing.Point(132, 102);
             this.txtPassword.MaxLength = 32767;
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.PasswordChar = '\0';
+            this.txtPassword.PasswordChar = '*';
             this.txtPassword.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtPassword.SelectedText = "";
             this.txtPassword.SelectionLength = 0;
@@ -96,7 +93,6 @@
             this.txtPassword.ShortcutsEnabled = true;
             this.txtPassword.Size = new System.Drawing.Size(218, 23);
             this.txtPassword.TabIndex = 1;
-            this.txtPassword.Text = "Please Enter Password";
             this.txtPassword.UseSelectable = true;
             this.txtPassword.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtPassword.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
@@ -117,7 +113,7 @@
             this.metroButton1.Location = new System.Drawing.Point(213, 142);
             this.metroButton1.Name = "metroButton1";
             this.metroButton1.Size = new System.Drawing.Size(137, 36);
-            this.metroButton1.TabIndex = 3;
+            this.metroButton1.TabIndex = 2;
             this.metroButton1.Text = "Login";
             this.metroButton1.UseSelectable = true;
             this.metroButton1.Click += new System.EventHandler(this.metroButton1_Click);
@@ -137,7 +133,7 @@
             this.metroButton2.Location = new System.Drawing.Point(48, 142);
             this.metroButton2.Name = "metroButton2";
             this.metroButton2.Size = new System.Drawing.Size(141, 36);
-            this.metroButton2.TabIndex = 5;
+            this.metroButton2.TabIndex = 3;
             this.metroButton2.Text = "Exit";
             this.metroButton2.UseSelectable = true;
             this.metroButton2.Click += new System.EventHandler(this.metroButton2_Click);
