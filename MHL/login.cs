@@ -30,7 +30,7 @@ namespace MHL
 
         private void metroButton1_Click(object sender, EventArgs e)
         {
-            string Loginquery = ("Select TeacherLastName from PWDB where Email='" + txtUserName.Text.Trim() + "' and Password='" + txtPassword.Text.Trim() + "'");
+            string Loginquery = ("Select TeacherLastName, Admin from PWDB where Email='" + txtUserName.Text.Trim() + "' and Password='" + txtPassword.Text.Trim() + "'");
             SqlConnection _sqlCon = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|dbFile\PWDB.mdf;Integrated Security=True;Connect Timeout=30");            
             DataTable dt = new DataTable();            
             SqlDataAdapter sda = new SqlDataAdapter(Loginquery, _sqlCon);
@@ -50,17 +50,23 @@ namespace MHL
                         if (dt.Rows.Count == 1)
                         {
                             MessageBox.Show("   Welcome " + dt.Rows[0][0].ToString(), "Murphy Login Helper");
-                            this.Hide();
+                            this.Hide();                            
                             MLH frm = new MLH();
+                            if (dt.Rows[0][1].ToString() == "True")
                             {
                                 frm.ShowDialog();
                             }
+                            else
+                            {
+                                frm.hideTab(true);
+                                frm.ShowDialog();
+                            }                                           
                             this.Close();
                         }
                         else
                         {
-                            MessageBox.Show("Please check your credentials and try again!", "Failed to Login", MessageBoxButtons.OK,
-    MessageBoxIcon.Exclamation);
+                            MessageBox.Show("Please check your credentials and try again!", "Failed to Login",
+                                MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             txtPassword.Clear();
                             txtPassword.Focus();
                         }

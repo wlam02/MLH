@@ -38,6 +38,7 @@
             this.RadioBtnIsStudent = new MetroFramework.Controls.MetroRadioButton();
             this.RadioBtnIsTeacher = new MetroFramework.Controls.MetroRadioButton();
             this.lblTeacherLastName = new MetroFramework.Controls.MetroLabel();
+            this.chkBoxAdmin = new MetroFramework.Controls.MetroCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pWDBBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pWDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
@@ -280,9 +281,9 @@
             this.RadioBtnIsTeacher.AutoSize = true;
             this.RadioBtnIsTeacher.Location = new System.Drawing.Point(161, 36);
             this.RadioBtnIsTeacher.Name = "RadioBtnIsTeacher";
-            this.RadioBtnIsTeacher.Size = new System.Drawing.Size(136, 15);
+            this.RadioBtnIsTeacher.Size = new System.Drawing.Size(89, 15);
             this.RadioBtnIsTeacher.TabIndex = 23;
-            this.RadioBtnIsTeacher.Text = "Add Teacher / Admin";
+            this.RadioBtnIsTeacher.Text = "Add Teacher";
             this.RadioBtnIsTeacher.UseSelectable = true;
             this.RadioBtnIsTeacher.CheckedChanged += new System.EventHandler(this.RadioBtnIsAdmin_CheckedChanged);
             // 
@@ -295,12 +296,24 @@
             this.lblTeacherLastName.TabIndex = 5;
             this.lblTeacherLastName.Text = "Teacher Last Name";
             // 
+            // chkBoxAdmin
+            // 
+            this.chkBoxAdmin.AutoSize = true;
+            this.chkBoxAdmin.Location = new System.Drawing.Point(269, 36);
+            this.chkBoxAdmin.Name = "chkBoxAdmin";
+            this.chkBoxAdmin.Size = new System.Drawing.Size(91, 15);
+            this.chkBoxAdmin.TabIndex = 24;
+            this.chkBoxAdmin.Text = "Make Admin";
+            this.chkBoxAdmin.UseSelectable = true;
+            this.chkBoxAdmin.Visible = false;
+            // 
             // AddUserForm
             // 
             this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(489, 382);
+            this.Controls.Add(this.chkBoxAdmin);
             this.Controls.Add(this.RadioBtnIsTeacher);
             this.Controls.Add(this.RadioBtnIsStudent);
             this.Controls.Add(this.ComboTeacherLN);
@@ -348,5 +361,6 @@
         private MetroFramework.Controls.MetroRadioButton RadioBtnIsStudent;
         private MetroFramework.Controls.MetroRadioButton RadioBtnIsTeacher;
         private MetroFramework.Controls.MetroLabel lblTeacherLastName;
+        private MetroFramework.Controls.MetroCheckBox chkBoxAdmin;
     }
 }

@@ -132,6 +132,7 @@ namespace MHL
                 lblEmail.Text = "Student EMail";
                 txtAddEmail.Text = "Enter Student E-mail Address";
                 lblTeacherLastName.Visible = true;
+                chkBoxAdmin.Visible = false;
                 ComboTeacherLN.Visible = true;
             }
             else
@@ -143,6 +144,7 @@ namespace MHL
                 lblEmail.Text = "Teacher EMail";
                 txtAddEmail.Text = "Enter Teacher E-mail Address";
                 lblTeacherLastName.Visible = false;
+                chkBoxAdmin.Visible = true;
                 ComboTeacherLN.Visible = false;
             }
         }
@@ -169,6 +171,7 @@ namespace MHL
                         sqlCmd.Parameters.AddWithValue("@TeacherLastName", txtAddLName.Text.Trim());
                         sqlCmd.Parameters.AddWithValue("@TeacherFirstName", txtAddFName.Text.Trim());
                         sqlCmd.Parameters.AddWithValue("@Password", txtAddPW.Text.Trim());
+                        sqlCmd.Parameters.AddWithValue("@Admin", chkBoxAdmin.Checked);
                         sqlCmd.ExecuteNonQuery();
                         MessageBox.Show("Saved sucsessfully");
                     }
@@ -210,6 +213,7 @@ namespace MHL
                         sqlCmd.Parameters.AddWithValue("@Email", txtAddEmail.Text.Trim());
                         sqlCmd.Parameters.AddWithValue("@TeacherLastName", ComboTeacherLN.Text.Trim());
                         sqlCmd.Parameters.AddWithValue("@Password", txtAddPW.Text.Trim());
+                        sqlCmd.Parameters.AddWithValue("@Admin", 0);
                         sqlCmd.ExecuteNonQuery();
                         MessageBox.Show("Saved sucsessfully");
                     }

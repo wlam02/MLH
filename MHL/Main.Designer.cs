@@ -80,6 +80,7 @@
             this.getAllDataBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.getAllDataTableAdapter = new MHL.PWDBDataSetTableAdapters.GetAllDataTableAdapter();
             this.pWDBTableAdapter1 = new MHL.PWDBDataSetTableAdapters.PWDBTableAdapter();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pWDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pWDBBindingSource)).BeginInit();
             this.tabMain.SuspendLayout();
@@ -125,6 +126,7 @@
             // tabPWGenerator
             // 
             this.tabPWGenerator.AutoScroll = true;
+            this.tabPWGenerator.Controls.Add(this.button1);
             this.tabPWGenerator.Controls.Add(this.picLogin);
             this.tabPWGenerator.Controls.Add(this.picPW);
             this.tabPWGenerator.Controls.Add(this.label4);
@@ -143,6 +145,7 @@
             this.tabPWGenerator.TabIndex = 0;
             this.tabPWGenerator.Text = "Generate Login";
             this.tabPWGenerator.UseVisualStyleBackColor = true;
+            this.tabPWGenerator.Click += new System.EventHandler(this.tabPWGenerator_Click);
             // 
             // picLogin
             // 
@@ -169,7 +172,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(132, 12);
+            this.label4.Location = new System.Drawing.Point(211, 9);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(78, 13);
             this.label4.TabIndex = 10;
@@ -181,7 +184,7 @@
             this.comboTeacherName.DisplayMember = "TeacherLastName";
             this.comboTeacherName.FormattingEnabled = true;
             this.comboTeacherName.ItemHeight = 23;
-            this.comboTeacherName.Location = new System.Drawing.Point(135, 31);
+            this.comboTeacherName.Location = new System.Drawing.Point(214, 28);
             this.comboTeacherName.Name = "comboTeacherName";
             this.comboTeacherName.Size = new System.Drawing.Size(250, 29);
             this.comboTeacherName.TabIndex = 9;
@@ -192,7 +195,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(135, 73);
+            this.label3.Location = new System.Drawing.Point(214, 70);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(75, 13);
             this.label3.TabIndex = 8;
@@ -204,7 +207,7 @@
             this.ComboName.DisplayMember = "LastNAME";
             this.ComboName.FormattingEnabled = true;
             this.ComboName.ItemHeight = 23;
-            this.ComboName.Location = new System.Drawing.Point(135, 89);
+            this.ComboName.Location = new System.Drawing.Point(214, 86);
             this.ComboName.Name = "ComboName";
             this.ComboName.Size = new System.Drawing.Size(253, 29);
             this.ComboName.TabIndex = 7;
@@ -225,9 +228,9 @@
             this.pictureBox1.ErrorImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.ErrorImage")));
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.InitialImage")));
-            this.pictureBox1.Location = new System.Drawing.Point(687, 17);
+            this.pictureBox1.Location = new System.Drawing.Point(676, 9);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(304, 290);
+            this.pictureBox1.Size = new System.Drawing.Size(315, 298);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
@@ -244,9 +247,9 @@
             // btnPringBarCode
             // 
             this.btnPringBarCode.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnPringBarCode.Location = new System.Drawing.Point(417, 98);
+            this.btnPringBarCode.Location = new System.Drawing.Point(285, 127);
             this.btnPringBarCode.Name = "btnPringBarCode";
-            this.btnPringBarCode.Size = new System.Drawing.Size(136, 20);
+            this.btnPringBarCode.Size = new System.Drawing.Size(136, 29);
             this.btnPringBarCode.TabIndex = 1;
             this.btnPringBarCode.Text = "Print Barcode";
             this.btnPringBarCode.UseVisualStyleBackColor = true;
@@ -255,9 +258,9 @@
             // btnGenBarCode
             // 
             this.btnGenBarCode.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnGenBarCode.Location = new System.Drawing.Point(417, 31);
+            this.btnGenBarCode.Location = new System.Drawing.Point(133, 127);
             this.btnGenBarCode.Name = "btnGenBarCode";
-            this.btnGenBarCode.Size = new System.Drawing.Size(136, 48);
+            this.btnGenBarCode.Size = new System.Drawing.Size(136, 29);
             this.btnGenBarCode.TabIndex = 0;
             this.btnGenBarCode.Text = "Generate Barcode";
             this.btnGenBarCode.UseVisualStyleBackColor = true;
@@ -291,6 +294,7 @@
             this.tabAddEdit.TabIndex = 1;
             this.tabAddEdit.Text = "Admin Control";
             this.tabAddEdit.UseVisualStyleBackColor = true;
+            this.tabAddEdit.Click += new System.EventHandler(this.tabAddEdit_Click);
             // 
             // dataGridView
             // 
@@ -711,6 +715,17 @@
             // 
             this.pWDBTableAdapter1.ClearBeforeFill = true;
             // 
+            // button1
+            // 
+            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button1.Location = new System.Drawing.Point(437, 127);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(136, 29);
+            this.button1.TabIndex = 13;
+            this.button1.Text = "Switch to Admin";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // MLH
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -758,7 +773,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnPringBarCode;
         private System.Windows.Forms.Button btnGenBarCode;
-        private System.Windows.Forms.TabPage tabAddEdit;
+        public System.Windows.Forms.TabPage tabAddEdit;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
@@ -802,6 +817,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn teacherFirstNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn teacherLastNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn passwordDataGridViewTextBoxColumn;
+        private System.Windows.Forms.Button button1;
     }
 }
 

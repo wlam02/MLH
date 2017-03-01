@@ -13,8 +13,8 @@ using System.Drawing;
 using System.IO;
 
 namespace MHL
-{   
-    public partial class MLH : MetroFramework.Forms.MetroForm
+{
+        public partial class MLH : MetroFramework.Forms.MetroForm
     
     {
         SqlConnection _sqlCon = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|dbFile\PWDB.mdf;Integrated Security=True;Connect Timeout=30");
@@ -37,7 +37,7 @@ namespace MHL
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-
+            hideTab(true);
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -390,6 +390,35 @@ namespace MHL
         private void dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void tabAddEdit_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        public void hideTab(Boolean showTab)
+        {
+            if (showTab)
+            {
+                tabMain.TabPages.Remove(tabAddEdit);
+            }
+           else
+            {
+                tabMain.TabPages.Add(tabAddEdit);
+            }                        
+        }
+
+        private void tabPWGenerator_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            login AdminFRM = new login();
+            AdminFRM.ShowDialog();
         }
     }
 }
