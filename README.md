@@ -1,2 +1,5 @@
-# MLH
-Murphy Login Helper
+This application targets a problem students are having with their Chromebook because the login process to the school system requires long and complicated credentials made of their school Email and individual password and for some students this can be difficult and time consuming. 
+Since the solution does not need to be portable, this Window form based application that offers database functionality without the need for a database server. 
+This application will store and reproduce the login credentials of the students in Barcode format, allowing a teacher to generate a printable password credential for students, without jeopardizing their integrity and while allowing them to be public.
+A teacher can then use a USB handheld scanner to scan the login and password barcode directly from the application displayed on the screen. Alternately, they can print the credentials and have the student use that to quickly log into the system.
+The application access is restricted to existing users, and has an Administrator Portal Tab to manage new or existing users. This Administrator Tab is accessible only to accounts designated as Admin in the database.
