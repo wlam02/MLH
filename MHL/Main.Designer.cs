@@ -77,6 +77,7 @@
             this.teacherLastNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.passwordDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Admin = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chkIsAdmin = new MetroFramework.Controls.MetroCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pWDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pWDBBindingSource)).BeginInit();
             this.tabMain.SuspendLayout();
@@ -266,6 +267,7 @@
             // 
             // tabAddEdit
             // 
+            this.tabAddEdit.Controls.Add(this.chkIsAdmin);
             this.tabAddEdit.Controls.Add(this.picSave);
             this.tabAddEdit.Controls.Add(this.picDel);
             this.tabAddEdit.Controls.Add(this.picAdd);
@@ -341,9 +343,9 @@
             // 
             // btnFrmClear
             // 
-            this.btnFrmClear.Location = new System.Drawing.Point(118, 257);
+            this.btnFrmClear.Location = new System.Drawing.Point(199, 257);
             this.btnFrmClear.Name = "btnFrmClear";
-            this.btnFrmClear.Size = new System.Drawing.Size(180, 23);
+            this.btnFrmClear.Size = new System.Drawing.Size(99, 23);
             this.btnFrmClear.TabIndex = 27;
             this.btnFrmClear.Text = "Clear";
             this.btnFrmClear.UseSelectable = true;
@@ -572,7 +574,7 @@
             // 
             // metroButton1
             // 
-            this.metroButton1.Location = new System.Drawing.Point(16, 257);
+            this.metroButton1.Location = new System.Drawing.Point(97, 257);
             this.metroButton1.Name = "metroButton1";
             this.metroButton1.Size = new System.Drawing.Size(96, 23);
             this.metroButton1.TabIndex = 36;
@@ -690,6 +692,16 @@
             this.Admin.ToolTipText = "Admin Rights?";
             this.Admin.Width = 55;
             // 
+            // chkIsAdmin
+            // 
+            this.chkIsAdmin.AutoSize = true;
+            this.chkIsAdmin.Location = new System.Drawing.Point(21, 261);
+            this.chkIsAdmin.Name = "chkIsAdmin";
+            this.chkIsAdmin.Size = new System.Drawing.Size(59, 15);
+            this.chkIsAdmin.TabIndex = 41;
+            this.chkIsAdmin.Text = "Admin";
+            this.chkIsAdmin.UseSelectable = true;
+            // 
             // MLH
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -768,6 +780,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn teacherLastNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn passwordDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn Admin;
+        private MetroFramework.Controls.MetroCheckBox chkIsAdmin;
     }
 }
 

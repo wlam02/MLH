@@ -240,6 +240,7 @@ namespace MHL
             txteditemail.Clear();
             txtEditPW.Clear();
             txtSearch.Clear();
+            chkIsAdmin.Checked = false;
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -446,9 +447,10 @@ namespace MHL
                         sqlCmd.Parameters.AddWithValue("@Email", txteditemail.Text.Trim());
                         sqlCmd.Parameters.AddWithValue("@TeacherLastName", comboTeacherLastName.Text.Trim());
                         sqlCmd.Parameters.AddWithValue("@Password", txtEditPW.Text.Trim());
-                        sqlCmd.Parameters.AddWithValue("@Admin", false);
+                        sqlCmd.Parameters.AddWithValue("@Admin", chkIsAdmin.Checked);
                         sqlCmd.ExecuteNonQuery();
                         MessageBox.Show("Record Updated Sucsessfully");
+                        FillDataGridView(""); //refresh the datagrid
                     }
                 }
                 catch (Exception ex)

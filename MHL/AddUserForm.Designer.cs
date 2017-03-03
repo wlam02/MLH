@@ -306,6 +306,7 @@
             this.chkBoxAdmin.Text = "Make Admin";
             this.chkBoxAdmin.UseSelectable = true;
             this.chkBoxAdmin.Visible = false;
+            this.chkBoxAdmin.CheckedChanged += new System.EventHandler(this.chkBoxAdmin_CheckedChanged);
             // 
             // AddUserForm
             // 

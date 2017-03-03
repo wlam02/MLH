@@ -240,6 +240,11 @@ namespace MHL
         {
             CheckIfTeacher();
         }
+
+        private void chkBoxAdmin_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 
