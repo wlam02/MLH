@@ -14,22 +14,22 @@ using System.IO;
 
 namespace MHL
 {
-        public partial class MLH : MetroFramework.Forms.MetroForm
-    
+    public partial class MLH : MetroFramework.Forms.MetroForm
+
     {
         SqlConnection _sqlCon = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|dbFile\PWDB.mdf;Integrated Security=True;Connect Timeout=30");
-        int UserID = 0; 
+        int UserID = 0;
         string TeacherdropSelectCommand = "select TeacherLastName from PWDB group by TeacherLastName";
         public MLH()
         {
             InitializeComponent();
         }
-        
+
         private void Form1_Load(object sender, EventArgs e)
-        {            
-            this.pWDBTableAdapter1.Fill(this.pWDBDataSet.PWDB);
+        {
+            FillDataGridView("");
             dataGridView.Columns[0].Visible = false; //Hides Student ID columns
-            dataGridView.RemoveEmptyColumns(); //Remove Empty Columns
+            /*dataGridView.RemoveEmptyColumns(); *///Remove Empty Columns
             FillDropDownList(TeacherdropSelectCommand, comboTeacherLastName, _sqlCon); // Group Teacher name
             FillDropDownList(TeacherdropSelectCommand, comboTeacherName, _sqlCon); //Group Teacher by Name for Add Form
             FillNameDropDownList(("Select LastName from PWDB Where TeacherLastName = " + "'" + comboTeacherName.Text + "'"), ComboName, _sqlCon);
@@ -46,7 +46,7 @@ namespace MHL
             {
                 if (_sqlCon.State == ConnectionState.Closed) //check if the connection is closed
                     _sqlCon.Open();
-                SqlCommand sqlReadPWcmd = new SqlCommand("SELECT Password,Email FROM [PWDB] WHERE [LastNAME] LIKE" + "'"+ComboName.Text.Trim() + "'", _sqlCon);
+                SqlCommand sqlReadPWcmd = new SqlCommand("SELECT Password,Email FROM [PWDB] WHERE [LastNAME] LIKE" + "'" + ComboName.Text.Trim() + "'", _sqlCon);
                 SqlDataReader reader;
                 sqlReadPWcmd.CommandType = CommandType.Text;
                 sqlReadPWcmd.Connection = _sqlCon;
@@ -62,22 +62,22 @@ namespace MHL
                 Bitmap PWbitmap = new Bitmap(barcode.Length * 80, 40);
                 Bitmap Loginbitmap = new Bitmap(barcode.Length * 80, 40);
                 using (Graphics graphics = Graphics.FromImage(PWbitmap))
-                    {
-                        Font OFont = new Font("IDAutomationHC39M", 16);
-                        PointF point = new PointF(2f, 2f);
-                        SolidBrush black = new SolidBrush(Color.Black);
-                        SolidBrush White = new SolidBrush(Color.White);
-                        graphics.FillRectangle(White, 0,0, PWbitmap.Width, PWbitmap.Height);
-                        graphics.DrawString(barcode, OFont, black,point);
-                        
-                    }
-                    using (MemoryStream ms = new MemoryStream())
-                    {
+                {
+                    Font OFont = new Font("IDAutomationHC39M", 16);
+                    PointF point = new PointF(2f, 2f);
+                    SolidBrush black = new SolidBrush(Color.Black);
+                    SolidBrush White = new SolidBrush(Color.White);
+                    graphics.FillRectangle(White, 0, 0, PWbitmap.Width, PWbitmap.Height);
+                    graphics.DrawString(barcode, OFont, black, point);
+
+                }
+                using (MemoryStream ms = new MemoryStream())
+                {
                     PWbitmap.Save(ms, ImageFormat.Png);
-                        picPW.Image = PWbitmap;
-                        picPW.Height = PWbitmap.Height;
-                        picPW.Width = PWbitmap.Width;
-                    }
+                    picPW.Image = PWbitmap;
+                    picPW.Height = PWbitmap.Height;
+                    picPW.Width = PWbitmap.Width;
+                }
 
                 using (Graphics graphics = Graphics.FromImage(Loginbitmap))
                 {
@@ -167,14 +167,14 @@ namespace MHL
             txtSearch.Clear();
             try
             {
-                FillDataGridView();
+                FillDataGridView(txtSearch.Text.Trim());
             }
             catch (Exception ex)
             {
 
                 MessageBox.Show(ex.Message, "Error Message");
             }
-            
+
         }
 
         private void picPW_Click(object sender, EventArgs e)
@@ -188,13 +188,13 @@ namespace MHL
         }
 
 
-        void FillDataGridView()
+        void FillDataGridView(string lastName)
         {
             if (_sqlCon.State == ConnectionState.Closed) //check if the connection is closed
                 _sqlCon.Open();
             SqlDataAdapter sqlDa = new SqlDataAdapter("StudentViewOrSearch", _sqlCon);
             sqlDa.SelectCommand.CommandType = CommandType.StoredProcedure;
-            sqlDa.SelectCommand.Parameters.AddWithValue("@LastNAME", txtSearch.Text.Trim());
+            sqlDa.SelectCommand.Parameters.AddWithValue("@LastNAME", lastName);
             DataTable dtbl = new DataTable();
             sqlDa.Fill(dtbl);
             dataGridView.DataSource = dtbl;
@@ -228,18 +228,7 @@ namespace MHL
 
         private void dataGridView1_DoubleClick_1(object sender, EventArgs e)
         {
-            if (dataGridView.CurrentRow.Index != -1) //Check if the current datagride is selected 
-            {
-                UserID = Convert.ToInt32(dataGridView.CurrentRow.Cells[0].Value.ToString());
-                txteditFirstName.Text = dataGridView.CurrentRow.Cells[1].Value.ToString();
-                txteditLastName.Text = dataGridView.CurrentRow.Cells[2].Value.ToString();
-                txteditemail.Text = dataGridView.CurrentRow.Cells[3].Value.ToString();
-                comboTeacherLastName.Text = dataGridView.CurrentRow.Cells[5].Value.ToString();
-                txtEditPW.Text = dataGridView.CurrentRow.Cells[6].Value.ToString();
-                //btnSave.Text = "Update";
-                //btnDelete.Enabled = true;
 
-            }
         }
 
         private void btnFrmClear_Click(object sender, EventArgs e)
@@ -252,26 +241,18 @@ namespace MHL
             txtEditPW.Clear();
             txtSearch.Clear();
         }
-        
+
         private void btnSearch_Click(object sender, EventArgs e)
         {
             dataGridView.DataSource = null;
             try
             {
-                FillDataGridView();
+                FillDataGridView(txtSearch.Text.Trim());
             }
             catch (Exception ex)
             {
 
                 MessageBox.Show(ex.Message, "Error Message");
-            }
-        }
-
-        private void pictureBox2_Click_1(object sender, EventArgs e)
-        {
-            using (AddUserForm frm = new AddUserForm())
-            {
-                frm.ShowDialog();
             }
         }
 
@@ -281,23 +262,8 @@ namespace MHL
         }
 
         private void picReload_Click(object sender, EventArgs e)
-        {            
-            try
-            {
-                if (_sqlCon.State == ConnectionState.Closed)
-                {
-                    _sqlCon.Open();
-                }
-                pWDBTableAdapter1.Fill(pWDBDataSet.PWDB);
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show("There was an error accessing your data. DETAIL: " + ex.Message);
-            }
-            finally
-            {
-                _sqlCon.Close();
-            }
+        {
+
         }
 
         private void picSave_Click(object sender, EventArgs e)
@@ -312,13 +278,10 @@ namespace MHL
 
         private void picEdit_Click(object sender, EventArgs e)
         {
-            using (AddUserForm frm = new AddUserForm())
-            {
-                frm.ShowDialog();
-            }
+
         }
 
-       
+
         public static void FillDropDownList(string Query, ComboBox comboTeacherName, SqlConnection cn)
         {
             DataTable dt = new DataTable();
@@ -355,7 +318,7 @@ namespace MHL
                 {
                     cn.Open();
                 }
-                
+
                 dt.Load(cmd.ExecuteReader());
                 ComboName.DataSource = dt;
                 ComboName.ValueMember = "LastName";
@@ -373,15 +336,14 @@ namespace MHL
 
         private void comboTeacherName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            FillNameDropDownList(("Select LastName from PWDB Where TeacherLastName = " +"'"+ comboTeacherName.Text + "'"), ComboName, _sqlCon);
+            FillNameDropDownList(("Select LastName from PWDB Where TeacherLastName = " + "'" + comboTeacherName.Text + "'"), ComboName, _sqlCon);
         }
 
         private void tabMain_Selected(object sender, TabControlEventArgs e)
         {
 
-           pWDBTableAdapter1.Fill(this.pWDBDataSet.PWDB);      
             dataGridView.Columns[0].Visible = false; //Hides Student ID columns
-            dataGridView.RemoveEmptyColumns(); //Remove Empty Columns
+                                                     /* dataGridView.RemoveEmptyColumns();*/ //Remove Empty Columns
             FillDropDownList(TeacherdropSelectCommand, comboTeacherLastName, _sqlCon); // Group Teacher name
             FillDropDownList(TeacherdropSelectCommand, comboTeacherName, _sqlCon); //Group Teacher by Name for Add Form
             FillNameDropDownList(("Select LastName from PWDB Where TeacherLastName = " + "'" + comboTeacherName.Text + "'"), ComboName, _sqlCon);
@@ -403,10 +365,10 @@ namespace MHL
             {
                 tabMain.TabPages.Remove(tabAddEdit);
             }
-           else
+            else
             {
                 tabMain.TabPages.Add(tabAddEdit);
-            }                        
+            }
         }
 
         private void tabPWGenerator_Click(object sender, EventArgs e)
@@ -420,5 +382,85 @@ namespace MHL
             login AdminFRM = new login();
             AdminFRM.ShowDialog();
         }
-    }
+
+        private void metroButton1_Click_1(object sender, EventArgs e)
+        {
+            FillDataGridView("");
+        }
+
+        private void metroButton2_Click_1(object sender, EventArgs e)
+        {
+            using (AddUserForm frm = new AddUserForm())
+            {
+                frm.ShowDialog();
+            }
+        }
+
+        private void metroButton2_Click_2(object sender, EventArgs e)
+        {
+            using (AddUserForm frm = new AddUserForm())
+            {
+                frm.ShowDialog();
+            }
+        }
+
+        private void picDel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView_DoubleClick(object sender, EventArgs e)
+        {
+            if (dataGridView.CurrentRow.Index != -1) //Check if the current datagride is selected 
+            {
+                UserID = Convert.ToInt32(dataGridView.CurrentRow.Cells[0].Value.ToString());
+                txteditFirstName.Text = dataGridView.CurrentRow.Cells[1].Value.ToString();
+                txteditLastName.Text = dataGridView.CurrentRow.Cells[2].Value.ToString();
+                txteditemail.Text = dataGridView.CurrentRow.Cells[3].Value.ToString();
+                comboTeacherLastName.Text = dataGridView.CurrentRow.Cells[5].Value.ToString();
+                txtEditPW.Text = dataGridView.CurrentRow.Cells[6].Value.ToString();
+                picSave.Enabled = true;
+                picDel.Enabled = true;
+            }
+        }
+
+        private void picSave_Click_1(object sender, EventArgs e)
+        {
+            DialogResult save = MessageBox.Show("Save Changes to Database?", "Please Confirm", MessageBoxButtons.YesNo);
+            if (save == DialogResult.No)
+            {
+                return;
+            }
+            else
+            {
+                try
+                {
+                    if (_sqlCon.State == ConnectionState.Closed)
+                    {
+                        _sqlCon.Open();                       
+                        SqlCommand sqlCmd = new SqlCommand("EditUser", _sqlCon);
+                        sqlCmd.CommandType = CommandType.StoredProcedure;                   
+                        sqlCmd.Parameters.AddWithValue("@UserID", UserID);
+                        sqlCmd.Parameters.AddWithValue("@FirstNAME", txteditFirstName.Text.Trim());
+                        sqlCmd.Parameters.AddWithValue("@LastNAME", txteditLastName.Text.Trim());
+                        sqlCmd.Parameters.AddWithValue("@Email", txteditemail.Text.Trim());
+                        sqlCmd.Parameters.AddWithValue("@TeacherLastName", comboTeacherLastName.Text.Trim());
+                        sqlCmd.Parameters.AddWithValue("@Password", txtEditPW.Text.Trim());
+                        sqlCmd.Parameters.AddWithValue("@Admin", false);
+                        sqlCmd.ExecuteNonQuery();
+                        MessageBox.Show("Record Updated Sucsessfully");
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show(ex.Message, "Error Message");
+                }
+                finally
+                {
+                    _sqlCon.Close();
+                }
+            }
+        }
+    }      
 }

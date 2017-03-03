@@ -691,6 +691,8 @@ namespace MHL {
             
             private global::System.Data.DataColumn columnPassword;
             
+            private global::System.Data.DataColumn columnAdmin;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public PWDBDataTable() {
@@ -782,6 +784,14 @@ namespace MHL {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn AdminColumn {
+                get {
+                    return this.columnAdmin;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -817,7 +827,7 @@ namespace MHL {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public PWDBRow AddPWDBRow(string FirstNAME, string LastNAME, string Email, string TeacherFirstName, string TeacherLastName, string Password) {
+            public PWDBRow AddPWDBRow(string FirstNAME, string LastNAME, string Email, string TeacherFirstName, string TeacherLastName, string Password, bool Admin) {
                 PWDBRow rowPWDBRow = ((PWDBRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -826,7 +836,8 @@ namespace MHL {
                         Email,
                         TeacherFirstName,
                         TeacherLastName,
-                        Password};
+                        Password,
+                        Admin};
                 rowPWDBRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowPWDBRow);
                 return rowPWDBRow;
@@ -863,6 +874,7 @@ namespace MHL {
                 this.columnTeacherFirstName = base.Columns["TeacherFirstName"];
                 this.columnTeacherLastName = base.Columns["TeacherLastName"];
                 this.columnPassword = base.Columns["Password"];
+                this.columnAdmin = base.Columns["Admin"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -882,6 +894,8 @@ namespace MHL {
                 base.Columns.Add(this.columnTeacherLastName);
                 this.columnPassword = new global::System.Data.DataColumn("Password", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnPassword);
+                this.columnAdmin = new global::System.Data.DataColumn("Admin", typeof(bool), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnAdmin);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnUserID}, true));
                 this.columnUserID.AutoIncrement = true;
@@ -899,6 +913,7 @@ namespace MHL {
                 this.columnTeacherLastName.MaxLength = 50;
                 this.columnPassword.AllowDBNull = false;
                 this.columnPassword.MaxLength = 50;
+                this.columnAdmin.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1584,6 +1599,17 @@ namespace MHL {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Admin {
+                get {
+                    return ((bool)(this[this.tablePWDB.AdminColumn]));
+                }
+                set {
+                    this[this.tablePWDB.AdminColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsFirstNAMENull() {
                 return this.IsNull(this.tablePWDB.FirstNAMEColumn);
             }
@@ -2170,10 +2196,11 @@ namespace MHL.PWDBDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("TeacherFirstName", "TeacherFirstName");
             tableMapping.ColumnMappings.Add("TeacherLastName", "TeacherLastName");
             tableMapping.ColumnMappings.Add("Password", "Password");
+            tableMapping.ColumnMappings.Add("Admin", "Admin");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[PWDB] WHERE (([UserID] = @Original_UserID) AND ((@IsNull_FirstNAME = 1 AND [FirstNAME] IS NULL) OR ([FirstNAME] = @Original_FirstNAME)) AND ((@IsNull_LastNAME = 1 AND [LastNAME] IS NULL) OR ([LastNAME] = @Original_LastNAME)) AND ([Email] = @Original_Email) AND ((@IsNull_TeacherFirstName = 1 AND [TeacherFirstName] IS NULL) OR ([TeacherFirstName] = @Original_TeacherFirstName)) AND ([TeacherLastName] = @Original_TeacherLastName) AND ([Password] = @Original_Password))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [PWDB] WHERE (([UserID] = @Original_UserID) AND ((@IsNull_FirstNAME = 1 AND [FirstNAME] IS NULL) OR ([FirstNAME] = @Original_FirstNAME)) AND ((@IsNull_LastNAME = 1 AND [LastNAME] IS NULL) OR ([LastNAME] = @Original_LastNAME)) AND ([Email] = @Original_Email) AND ((@IsNull_TeacherFirstName = 1 AND [TeacherFirstName] IS NULL) OR ([TeacherFirstName] = @Original_TeacherFirstName)) AND ([TeacherLastName] = @Original_TeacherLastName) AND ([Password] = @Original_Password) AND ([Admin] = @Original_Admin))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_UserID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UserID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_FirstNAME", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FirstNAME", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
@@ -2185,10 +2212,11 @@ namespace MHL.PWDBDataSetTableAdapters {
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TeacherFirstName", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TeacherFirstName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TeacherLastName", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TeacherLastName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Password", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Password", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Admin", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Admin", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[PWDB] ([FirstNAME], [LastNAME], [Email], [TeacherFirstName], [TeacherLastName], [Password]) VALUES (@FirstNAME, @LastNAME, @Email, @TeacherFirstName, @TeacherLastName, @Password);
-SELECT UserID, FirstNAME, LastNAME, Email, TeacherFirstName, TeacherLastName, Password FROM PWDB WHERE (UserID = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [PWDB] ([FirstNAME], [LastNAME], [Email], [TeacherFirstName], [TeacherLastName], [Password], [Admin]) VALUES (@FirstNAME, @LastNAME, @Email, @TeacherFirstName, @TeacherLastName, @Password, @Admin);
+SELECT UserID, FirstNAME, LastNAME, Email, TeacherFirstName, TeacherLastName, Password, Admin FROM PWDB WHERE (UserID = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FirstNAME", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FirstNAME", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@LastNAME", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "LastNAME", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -2196,10 +2224,11 @@ SELECT UserID, FirstNAME, LastNAME, Email, TeacherFirstName, TeacherLastName, Pa
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TeacherFirstName", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TeacherFirstName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TeacherLastName", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TeacherLastName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Password", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Password", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Admin", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Admin", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[PWDB] SET [FirstNAME] = @FirstNAME, [LastNAME] = @LastNAME, [Email] = @Email, [TeacherFirstName] = @TeacherFirstName, [TeacherLastName] = @TeacherLastName, [Password] = @Password WHERE (([UserID] = @Original_UserID) AND ((@IsNull_FirstNAME = 1 AND [FirstNAME] IS NULL) OR ([FirstNAME] = @Original_FirstNAME)) AND ((@IsNull_LastNAME = 1 AND [LastNAME] IS NULL) OR ([LastNAME] = @Original_LastNAME)) AND ([Email] = @Original_Email) AND ((@IsNull_TeacherFirstName = 1 AND [TeacherFirstName] IS NULL) OR ([TeacherFirstName] = @Original_TeacherFirstName)) AND ([TeacherLastName] = @Original_TeacherLastName) AND ([Password] = @Original_Password));
-SELECT UserID, FirstNAME, LastNAME, Email, TeacherFirstName, TeacherLastName, Password FROM PWDB WHERE (UserID = @UserID)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [PWDB] SET [FirstNAME] = @FirstNAME, [LastNAME] = @LastNAME, [Email] = @Email, [TeacherFirstName] = @TeacherFirstName, [TeacherLastName] = @TeacherLastName, [Password] = @Password, [Admin] = @Admin WHERE (([UserID] = @Original_UserID) AND ((@IsNull_FirstNAME = 1 AND [FirstNAME] IS NULL) OR ([FirstNAME] = @Original_FirstNAME)) AND ((@IsNull_LastNAME = 1 AND [LastNAME] IS NULL) OR ([LastNAME] = @Original_LastNAME)) AND ([Email] = @Original_Email) AND ((@IsNull_TeacherFirstName = 1 AND [TeacherFirstName] IS NULL) OR ([TeacherFirstName] = @Original_TeacherFirstName)) AND ([TeacherLastName] = @Original_TeacherLastName) AND ([Password] = @Original_Password) AND ([Admin] = @Original_Admin));
+SELECT UserID, FirstNAME, LastNAME, Email, TeacherFirstName, TeacherLastName, Password, Admin FROM PWDB WHERE (UserID = @UserID)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FirstNAME", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FirstNAME", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@LastNAME", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "LastNAME", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -2207,6 +2236,7 @@ SELECT UserID, FirstNAME, LastNAME, Email, TeacherFirstName, TeacherLastName, Pa
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TeacherFirstName", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TeacherFirstName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TeacherLastName", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TeacherLastName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Password", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Password", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Admin", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Admin", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_UserID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UserID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_FirstNAME", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FirstNAME", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_FirstNAME", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FirstNAME", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -2217,6 +2247,7 @@ SELECT UserID, FirstNAME, LastNAME, Email, TeacherFirstName, TeacherLastName, Pa
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TeacherFirstName", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TeacherFirstName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TeacherLastName", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TeacherLastName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Password", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Password", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Admin", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Admin", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@UserID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "UserID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
@@ -2234,7 +2265,7 @@ SELECT UserID, FirstNAME, LastNAME, Email, TeacherFirstName, TeacherLastName, Pa
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT UserID, FirstNAME, LastNAME, Email, TeacherFirstName, TeacherLastName, Pas" +
-                "sword FROM dbo.PWDB";
+                "sword, Admin FROM PWDB";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -2295,7 +2326,7 @@ SELECT UserID, FirstNAME, LastNAME, Email, TeacherFirstName, TeacherLastName, Pa
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_UserID, string Original_FirstNAME, string Original_LastNAME, string Original_Email, string Original_TeacherFirstName, string Original_TeacherLastName, string Original_Password) {
+        public virtual int Delete(int Original_UserID, string Original_FirstNAME, string Original_LastNAME, string Original_Email, string Original_TeacherFirstName, string Original_TeacherLastName, string Original_Password, bool Original_Admin) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_UserID));
             if ((Original_FirstNAME == null)) {
                 this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
@@ -2339,6 +2370,7 @@ SELECT UserID, FirstNAME, LastNAME, Email, TeacherFirstName, TeacherLastName, Pa
             else {
                 this.Adapter.DeleteCommand.Parameters[9].Value = ((string)(Original_Password));
             }
+            this.Adapter.DeleteCommand.Parameters[10].Value = ((bool)(Original_Admin));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -2359,7 +2391,7 @@ SELECT UserID, FirstNAME, LastNAME, Email, TeacherFirstName, TeacherLastName, Pa
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string FirstNAME, string LastNAME, string Email, string TeacherFirstName, string TeacherLastName, string Password) {
+        public virtual int Insert(string FirstNAME, string LastNAME, string Email, string TeacherFirstName, string TeacherLastName, string Password, bool Admin) {
             if ((FirstNAME == null)) {
                 this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
@@ -2396,6 +2428,7 @@ SELECT UserID, FirstNAME, LastNAME, Email, TeacherFirstName, TeacherLastName, Pa
             else {
                 this.Adapter.InsertCommand.Parameters[5].Value = ((string)(Password));
             }
+            this.Adapter.InsertCommand.Parameters[6].Value = ((bool)(Admin));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -2416,7 +2449,23 @@ SELECT UserID, FirstNAME, LastNAME, Email, TeacherFirstName, TeacherLastName, Pa
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string FirstNAME, string LastNAME, string Email, string TeacherFirstName, string TeacherLastName, string Password, int Original_UserID, string Original_FirstNAME, string Original_LastNAME, string Original_Email, string Original_TeacherFirstName, string Original_TeacherLastName, string Original_Password, int UserID) {
+        public virtual int Update(
+                    string FirstNAME, 
+                    string LastNAME, 
+                    string Email, 
+                    string TeacherFirstName, 
+                    string TeacherLastName, 
+                    string Password, 
+                    bool Admin, 
+                    int Original_UserID, 
+                    string Original_FirstNAME, 
+                    string Original_LastNAME, 
+                    string Original_Email, 
+                    string Original_TeacherFirstName, 
+                    string Original_TeacherLastName, 
+                    string Original_Password, 
+                    bool Original_Admin, 
+                    int UserID) {
             if ((FirstNAME == null)) {
                 this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
@@ -2453,50 +2502,52 @@ SELECT UserID, FirstNAME, LastNAME, Email, TeacherFirstName, TeacherLastName, Pa
             else {
                 this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(Password));
             }
-            this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Original_UserID));
+            this.Adapter.UpdateCommand.Parameters[6].Value = ((bool)(Admin));
+            this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(Original_UserID));
             if ((Original_FirstNAME == null)) {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((string)(Original_FirstNAME));
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(Original_FirstNAME));
             }
             if ((Original_LastNAME == null)) {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((string)(Original_LastNAME));
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((string)(Original_LastNAME));
             }
             if ((Original_Email == null)) {
                 throw new global::System.ArgumentNullException("Original_Email");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((string)(Original_Email));
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((string)(Original_Email));
             }
             if ((Original_TeacherFirstName == null)) {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[14].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((string)(Original_TeacherFirstName));
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((string)(Original_TeacherFirstName));
             }
             if ((Original_TeacherLastName == null)) {
                 throw new global::System.ArgumentNullException("Original_TeacherLastName");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((string)(Original_TeacherLastName));
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((string)(Original_TeacherLastName));
             }
             if ((Original_Password == null)) {
                 throw new global::System.ArgumentNullException("Original_Password");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((string)(Original_Password));
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((string)(Original_Password));
             }
-            this.Adapter.UpdateCommand.Parameters[16].Value = ((int)(UserID));
+            this.Adapter.UpdateCommand.Parameters[17].Value = ((bool)(Original_Admin));
+            this.Adapter.UpdateCommand.Parameters[18].Value = ((int)(UserID));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -2517,8 +2568,8 @@ SELECT UserID, FirstNAME, LastNAME, Email, TeacherFirstName, TeacherLastName, Pa
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string FirstNAME, string LastNAME, string Email, string TeacherFirstName, string TeacherLastName, string Password, int Original_UserID, string Original_FirstNAME, string Original_LastNAME, string Original_Email, string Original_TeacherFirstName, string Original_TeacherLastName, string Original_Password) {
-            return this.Update(FirstNAME, LastNAME, Email, TeacherFirstName, TeacherLastName, Password, Original_UserID, Original_FirstNAME, Original_LastNAME, Original_Email, Original_TeacherFirstName, Original_TeacherLastName, Original_Password, Original_UserID);
+        public virtual int Update(string FirstNAME, string LastNAME, string Email, string TeacherFirstName, string TeacherLastName, string Password, bool Admin, int Original_UserID, string Original_FirstNAME, string Original_LastNAME, string Original_Email, string Original_TeacherFirstName, string Original_TeacherLastName, string Original_Password, bool Original_Admin) {
+            return this.Update(FirstNAME, LastNAME, Email, TeacherFirstName, TeacherLastName, Password, Admin, Original_UserID, Original_FirstNAME, Original_LastNAME, Original_Email, Original_TeacherFirstName, Original_TeacherLastName, Original_Password, Original_Admin, Original_UserID);
         }
     }
     

@@ -151,7 +151,7 @@ namespace MHL
 
         private void AddTeacher()
         {
-            //            if (string.IsNullOrWhiteSpace(txtAddFName.Text) || string.IsNullOrWhiteSpace(txtAddLName.Text) ||
+            //    if (string.IsNullOrWhiteSpace(txtAddFName.Text) || string.IsNullOrWhiteSpace(txtAddLName.Text) ||
             //    string.IsNullOrWhiteSpace(txtAddPW.Text) || string.IsNullOrWhiteSpace(txtAddEmail.Text) || txtAddFName.Text == "Enter Teacher's First Name" || txtAddLName.Text == "Enter Student Last Name" || txtAddPW.Text == "Enter Password" || txtAddEmail.Text == "Enter Studetn E-mail / Login")
             //{
             //    MessageBox.Show("Please Fill All Fields");
