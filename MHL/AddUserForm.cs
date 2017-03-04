@@ -33,9 +33,7 @@ namespace MHL
         private void AddUserForm_Load(object sender, EventArgs e)
         {
             CheckIfTeacher();
-            // TODO: This line of code loads data into the 'pWDBDataSet.PWDB' table. You can move, or remove it, as needed.
-            //this.pWDBTableAdapter.Fill(this.pWDBDataSet.GetAllData);
-            string TeacherdropSelectCommand = "select TeacherLastName from PWDB group by TeacherLastName";
+            string TeacherdropSelectCommand = "select TeacherLastName from Teachers group by TeacherLastName";
             MLH.FillDropDownList(TeacherdropSelectCommand, ComboTeacherLN, sqlcon); // Group Teacher name
         }
 
@@ -242,6 +240,11 @@ namespace MHL
         }
 
         private void chkBoxAdmin_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ComboTeacherLN_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

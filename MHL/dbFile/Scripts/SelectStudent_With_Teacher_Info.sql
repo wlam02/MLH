@@ -1,0 +1,1 @@
+﻿Select Student.FirstNAME, Student.LastNAME, Student.Email, Teachers.TeacherLastName, Student.Password from Student Inner join Teachers on Student.TeacherID=Teachers.TeacherID;

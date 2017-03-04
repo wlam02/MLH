@@ -30,6 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MLH));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pWDBDataSet = new MHL.PWDBDataSet();
             this.pWDBBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabMain = new System.Windows.Forms.TabControl();
@@ -47,7 +50,15 @@
             this.btnPringBarCode = new System.Windows.Forms.Button();
             this.btnGenBarCode = new System.Windows.Forms.Button();
             this.tabAddEdit = new System.Windows.Forms.TabPage();
-            this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.picEdit = new MetroFramework.Controls.MetroButton();
+            this.rdoTeacherInfo = new System.Windows.Forms.RadioButton();
+            this.rdoStudentInfo = new System.Windows.Forms.RadioButton();
+            this.metroGrid1 = new MetroFramework.Controls.MetroGrid();
+            this.chkIsAdmin = new MetroFramework.Controls.MetroCheckBox();
+            this.picSave = new MetroFramework.Controls.MetroButton();
+            this.picDel = new MetroFramework.Controls.MetroButton();
+            this.picAdd = new MetroFramework.Controls.MetroButton();
+            this.metroButton1 = new MetroFramework.Controls.MetroButton();
             this.comboTeacherLastName = new MetroFramework.Controls.MetroComboBox();
             this.btnSearch = new MetroFramework.Controls.MetroButton();
             this.btnFrmClear = new MetroFramework.Controls.MetroButton();
@@ -59,25 +70,16 @@
             this.txteditLastName = new MetroFramework.Controls.MetroTextBox();
             this.lbleditLastName = new MetroFramework.Controls.MetroLabel();
             this.txteditFirstName = new MetroFramework.Controls.MetroTextBox();
+            this.lbleditFirstName = new MetroFramework.Controls.MetroLabel();
             this.txtSearch = new MetroFramework.Controls.MetroTextBox();
             this.lblHeader = new MetroFramework.Controls.MetroLabel();
             this.getAllDataBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.getAllDataTableAdapter = new MHL.PWDBDataSetTableAdapters.GetAllDataTableAdapter();
             this.pWDBTableAdapter1 = new MHL.PWDBDataSetTableAdapters.PWDBTableAdapter();
-            this.metroButton1 = new MetroFramework.Controls.MetroButton();
-            this.picAdd = new MetroFramework.Controls.MetroButton();
-            this.lbleditFirstName = new MetroFramework.Controls.MetroLabel();
-            this.picDel = new MetroFramework.Controls.MetroButton();
-            this.picSave = new MetroFramework.Controls.MetroButton();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.firstNAMEDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lastNAMEDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.emailDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.teacherFirstNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.teacherLastNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.passwordDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Admin = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.chkIsAdmin = new MetroFramework.Controls.MetroCheckBox();
+            this.studentTeacherDataSet = new MHL.StudentTeacherDataSet();
+            this.studentBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.studentTableAdapter = new MHL.StudentTeacherDataSetTableAdapters.StudentTableAdapter();
+            this.studentTeacherDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pWDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pWDBBindingSource)).BeginInit();
             this.tabMain.SuspendLayout();
@@ -86,8 +88,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.picPW)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabAddEdit.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.metroGrid1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.getAllDataBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.studentTeacherDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.studentBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.studentTeacherDataSetBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // pWDBDataSet
@@ -107,7 +112,7 @@
             this.tabMain.Location = new System.Drawing.Point(5, 22);
             this.tabMain.Name = "tabMain";
             this.tabMain.SelectedIndex = 0;
-            this.tabMain.Size = new System.Drawing.Size(1101, 360);
+            this.tabMain.Size = new System.Drawing.Size(884, 360);
             this.tabMain.TabIndex = 0;
             this.tabMain.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabMain_Selected);
             // 
@@ -129,7 +134,7 @@
             this.tabPWGenerator.Location = new System.Drawing.Point(4, 22);
             this.tabPWGenerator.Name = "tabPWGenerator";
             this.tabPWGenerator.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPWGenerator.Size = new System.Drawing.Size(1093, 334);
+            this.tabPWGenerator.Size = new System.Drawing.Size(876, 334);
             this.tabPWGenerator.TabIndex = 0;
             this.tabPWGenerator.Text = "Generate Login";
             this.tabPWGenerator.UseVisualStyleBackColor = true;
@@ -138,7 +143,7 @@
             // button1
             // 
             this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.Location = new System.Drawing.Point(437, 127);
+            this.button1.Location = new System.Drawing.Point(374, 122);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(136, 29);
             this.button1.TabIndex = 13;
@@ -149,9 +154,9 @@
             // picLogin
             // 
             this.picLogin.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.picLogin.Location = new System.Drawing.Point(42, 162);
+            this.picLogin.Location = new System.Drawing.Point(14, 166);
             this.picLogin.Name = "picLogin";
-            this.picLogin.Size = new System.Drawing.Size(603, 64);
+            this.picLogin.Size = new System.Drawing.Size(525, 64);
             this.picLogin.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.picLogin.TabIndex = 12;
             this.picLogin.TabStop = false;
@@ -160,9 +165,9 @@
             // picPW
             // 
             this.picPW.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.picPW.Location = new System.Drawing.Point(42, 245);
+            this.picPW.Location = new System.Drawing.Point(14, 259);
             this.picPW.Name = "picPW";
-            this.picPW.Size = new System.Drawing.Size(603, 62);
+            this.picPW.Size = new System.Drawing.Size(525, 62);
             this.picPW.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.picPW.TabIndex = 11;
             this.picPW.TabStop = false;
@@ -171,7 +176,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(211, 9);
+            this.label4.Location = new System.Drawing.Point(55, 26);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(78, 13);
             this.label4.TabIndex = 10;
@@ -183,7 +188,7 @@
             this.comboTeacherName.DisplayMember = "TeacherLastName";
             this.comboTeacherName.FormattingEnabled = true;
             this.comboTeacherName.ItemHeight = 23;
-            this.comboTeacherName.Location = new System.Drawing.Point(214, 28);
+            this.comboTeacherName.Location = new System.Drawing.Point(58, 45);
             this.comboTeacherName.Name = "comboTeacherName";
             this.comboTeacherName.Size = new System.Drawing.Size(250, 29);
             this.comboTeacherName.TabIndex = 9;
@@ -194,7 +199,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(214, 70);
+            this.label3.Location = new System.Drawing.Point(58, 87);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(75, 13);
             this.label3.TabIndex = 8;
@@ -202,21 +207,19 @@
             // 
             // ComboName
             // 
-            this.ComboName.DataSource = this.pWDBBindingSource;
-            this.ComboName.DisplayMember = "LastNAME";
             this.ComboName.FormattingEnabled = true;
             this.ComboName.ItemHeight = 23;
-            this.ComboName.Location = new System.Drawing.Point(214, 86);
+            this.ComboName.Location = new System.Drawing.Point(58, 103);
             this.ComboName.Name = "ComboName";
             this.ComboName.Size = new System.Drawing.Size(253, 29);
             this.ComboName.TabIndex = 7;
             this.ComboName.UseSelectable = true;
-            this.ComboName.ValueMember = "LastNAME";
+            this.ComboName.SelectedIndexChanged += new System.EventHandler(this.ComboName_SelectedIndexChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(42, 229);
+            this.label2.Location = new System.Drawing.Point(11, 243);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 13);
             this.label2.TabIndex = 5;
@@ -227,7 +230,7 @@
             this.pictureBox1.ErrorImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.ErrorImage")));
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.InitialImage")));
-            this.pictureBox1.Location = new System.Drawing.Point(676, 9);
+            this.pictureBox1.Location = new System.Drawing.Point(545, 9);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(315, 298);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -237,7 +240,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(42, 137);
+            this.label1.Location = new System.Drawing.Point(14, 150);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(33, 13);
             this.label1.TabIndex = 3;
@@ -246,7 +249,7 @@
             // btnPringBarCode
             // 
             this.btnPringBarCode.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnPringBarCode.Location = new System.Drawing.Point(285, 127);
+            this.btnPringBarCode.Location = new System.Drawing.Point(374, 70);
             this.btnPringBarCode.Name = "btnPringBarCode";
             this.btnPringBarCode.Size = new System.Drawing.Size(136, 29);
             this.btnPringBarCode.TabIndex = 1;
@@ -257,7 +260,7 @@
             // btnGenBarCode
             // 
             this.btnGenBarCode.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnGenBarCode.Location = new System.Drawing.Point(133, 127);
+            this.btnGenBarCode.Location = new System.Drawing.Point(374, 23);
             this.btnGenBarCode.Name = "btnGenBarCode";
             this.btnGenBarCode.Size = new System.Drawing.Size(136, 29);
             this.btnGenBarCode.TabIndex = 0;
@@ -267,12 +270,15 @@
             // 
             // tabAddEdit
             // 
+            this.tabAddEdit.Controls.Add(this.picEdit);
+            this.tabAddEdit.Controls.Add(this.rdoTeacherInfo);
+            this.tabAddEdit.Controls.Add(this.rdoStudentInfo);
+            this.tabAddEdit.Controls.Add(this.metroGrid1);
             this.tabAddEdit.Controls.Add(this.chkIsAdmin);
             this.tabAddEdit.Controls.Add(this.picSave);
             this.tabAddEdit.Controls.Add(this.picDel);
             this.tabAddEdit.Controls.Add(this.picAdd);
             this.tabAddEdit.Controls.Add(this.metroButton1);
-            this.tabAddEdit.Controls.Add(this.dataGridView);
             this.tabAddEdit.Controls.Add(this.comboTeacherLastName);
             this.tabAddEdit.Controls.Add(this.btnSearch);
             this.tabAddEdit.Controls.Add(this.btnFrmClear);
@@ -289,33 +295,148 @@
             this.tabAddEdit.Location = new System.Drawing.Point(4, 22);
             this.tabAddEdit.Name = "tabAddEdit";
             this.tabAddEdit.Padding = new System.Windows.Forms.Padding(3);
-            this.tabAddEdit.Size = new System.Drawing.Size(1093, 334);
+            this.tabAddEdit.Size = new System.Drawing.Size(876, 334);
             this.tabAddEdit.TabIndex = 1;
             this.tabAddEdit.Text = "Admin Control";
             this.tabAddEdit.UseVisualStyleBackColor = true;
             this.tabAddEdit.Click += new System.EventHandler(this.tabAddEdit_Click);
             // 
-            // dataGridView
+            // picEdit
             // 
-            this.dataGridView.AllowUserToOrderColumns = true;
-            this.dataGridView.AutoGenerateColumns = false;
-            this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.firstNAMEDataGridViewTextBoxColumn,
-            this.lastNAMEDataGridViewTextBoxColumn,
-            this.emailDataGridViewTextBoxColumn,
-            this.teacherFirstNameDataGridViewTextBoxColumn,
-            this.teacherLastNameDataGridViewTextBoxColumn,
-            this.passwordDataGridViewTextBoxColumn,
-            this.Admin});
-            this.dataGridView.DataSource = this.pWDBBindingSource;
-            this.dataGridView.Location = new System.Drawing.Point(304, 13);
-            this.dataGridView.Name = "dataGridView";
-            this.dataGridView.Size = new System.Drawing.Size(783, 308);
-            this.dataGridView.TabIndex = 35;
-            this.dataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellContentClick);
-            this.dataGridView.DoubleClick += new System.EventHandler(this.dataGridView_DoubleClick);
+            this.picEdit.BackgroundImage = global::MHL.Properties.Resources.EditS;
+            this.picEdit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.picEdit.Enabled = false;
+            this.picEdit.Location = new System.Drawing.Point(93, 13);
+            this.picEdit.Name = "picEdit";
+            this.picEdit.Size = new System.Drawing.Size(66, 66);
+            this.picEdit.TabIndex = 43;
+            this.picEdit.UseSelectable = true;
+            // 
+            // rdoTeacherInfo
+            // 
+            this.rdoTeacherInfo.AutoSize = true;
+            this.rdoTeacherInfo.Location = new System.Drawing.Point(617, 69);
+            this.rdoTeacherInfo.Name = "rdoTeacherInfo";
+            this.rdoTeacherInfo.Size = new System.Drawing.Size(120, 17);
+            this.rdoTeacherInfo.TabIndex = 17;
+            this.rdoTeacherInfo.Text = "Teacher Information";
+            this.rdoTeacherInfo.UseVisualStyleBackColor = true;
+            this.rdoTeacherInfo.CheckedChanged += new System.EventHandler(this.rdoTeacherInfo_CheckedChanged);
+            // 
+            // rdoStudentInfo
+            // 
+            this.rdoStudentInfo.AutoSize = true;
+            this.rdoStudentInfo.Checked = true;
+            this.rdoStudentInfo.Location = new System.Drawing.Point(740, 69);
+            this.rdoStudentInfo.Name = "rdoStudentInfo";
+            this.rdoStudentInfo.Size = new System.Drawing.Size(117, 17);
+            this.rdoStudentInfo.TabIndex = 16;
+            this.rdoStudentInfo.TabStop = true;
+            this.rdoStudentInfo.Text = "Student Information";
+            this.rdoStudentInfo.UseVisualStyleBackColor = true;
+            this.rdoStudentInfo.CheckedChanged += new System.EventHandler(this.rdoStudentInfo_CheckedChanged);
+            // 
+            // metroGrid1
+            // 
+            this.metroGrid1.AllowUserToAddRows = false;
+            this.metroGrid1.AllowUserToDeleteRows = false;
+            this.metroGrid1.AllowUserToOrderColumns = true;
+            this.metroGrid1.AllowUserToResizeRows = false;
+            this.metroGrid1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.metroGrid1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.metroGrid1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.metroGrid1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.metroGrid1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
+            this.metroGrid1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.metroGrid1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.metroGrid1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.metroGrid1.DefaultCellStyle = dataGridViewCellStyle2;
+            this.metroGrid1.EnableHeadersVisualStyles = false;
+            this.metroGrid1.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.metroGrid1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.metroGrid1.Location = new System.Drawing.Point(320, 92);
+            this.metroGrid1.Name = "metroGrid1";
+            this.metroGrid1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.metroGrid1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.metroGrid1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.metroGrid1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.metroGrid1.Size = new System.Drawing.Size(550, 206);
+            this.metroGrid1.TabIndex = 42;
+            // 
+            // chkIsAdmin
+            // 
+            this.chkIsAdmin.AutoSize = true;
+            this.chkIsAdmin.Location = new System.Drawing.Point(16, 306);
+            this.chkIsAdmin.Name = "chkIsAdmin";
+            this.chkIsAdmin.Size = new System.Drawing.Size(59, 15);
+            this.chkIsAdmin.TabIndex = 41;
+            this.chkIsAdmin.Text = "Admin";
+            this.chkIsAdmin.UseSelectable = true;
+            // 
+            // picSave
+            // 
+            this.picSave.BackgroundImage = global::MHL.Properties.Resources.SaveS;
+            this.picSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.picSave.Enabled = false;
+            this.picSave.Location = new System.Drawing.Point(181, 13);
+            this.picSave.Name = "picSave";
+            this.picSave.Size = new System.Drawing.Size(66, 66);
+            this.picSave.TabIndex = 40;
+            this.picSave.UseSelectable = true;
+            this.picSave.Click += new System.EventHandler(this.picSave_Click_1);
+            // 
+            // picDel
+            // 
+            this.picDel.BackgroundImage = global::MHL.Properties.Resources.DeleteS;
+            this.picDel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.picDel.Enabled = false;
+            this.picDel.Location = new System.Drawing.Point(273, 13);
+            this.picDel.Name = "picDel";
+            this.picDel.Size = new System.Drawing.Size(66, 66);
+            this.picDel.TabIndex = 39;
+            this.picDel.UseSelectable = true;
+            // 
+            // picAdd
+            // 
+            this.picAdd.BackgroundImage = global::MHL.Properties.Resources.AddS;
+            this.picAdd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.picAdd.Location = new System.Drawing.Point(9, 13);
+            this.picAdd.Name = "picAdd";
+            this.picAdd.Size = new System.Drawing.Size(66, 66);
+            this.picAdd.TabIndex = 37;
+            this.picAdd.UseSelectable = true;
+            this.picAdd.Click += new System.EventHandler(this.metroButton2_Click_1);
+            // 
+            // metroButton1
+            // 
+            this.metroButton1.Location = new System.Drawing.Point(104, 304);
+            this.metroButton1.Name = "metroButton1";
+            this.metroButton1.Size = new System.Drawing.Size(96, 23);
+            this.metroButton1.TabIndex = 36;
+            this.metroButton1.Text = "Refresh";
+            this.metroButton1.UseSelectable = true;
+            this.metroButton1.Click += new System.EventHandler(this.metroButton1_Click_1);
             // 
             // comboTeacherLastName
             // 
@@ -324,7 +445,7 @@
             this.comboTeacherLastName.DisplayMember = "TeacherLastName";
             this.comboTeacherLastName.FormattingEnabled = true;
             this.comboTeacherLastName.ItemHeight = 23;
-            this.comboTeacherLastName.Location = new System.Drawing.Point(118, 185);
+            this.comboTeacherLastName.Location = new System.Drawing.Point(118, 214);
             this.comboTeacherLastName.Name = "comboTeacherLastName";
             this.comboTeacherLastName.Size = new System.Drawing.Size(180, 29);
             this.comboTeacherLastName.TabIndex = 29;
@@ -333,7 +454,7 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(14, 298);
+            this.btnSearch.Location = new System.Drawing.Point(450, 304);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(98, 23);
             this.btnSearch.TabIndex = 28;
@@ -343,7 +464,7 @@
             // 
             // btnFrmClear
             // 
-            this.btnFrmClear.Location = new System.Drawing.Point(199, 257);
+            this.btnFrmClear.Location = new System.Drawing.Point(206, 304);
             this.btnFrmClear.Name = "btnFrmClear";
             this.btnFrmClear.Size = new System.Drawing.Size(99, 23);
             this.btnFrmClear.TabIndex = 27;
@@ -367,7 +488,7 @@
             this.txtEditPW.CustomButton.Visible = false;
             this.txtEditPW.Lines = new string[] {
         "Password"};
-            this.txtEditPW.Location = new System.Drawing.Point(93, 220);
+            this.txtEditPW.Location = new System.Drawing.Point(93, 185);
             this.txtEditPW.MaxLength = 32767;
             this.txtEditPW.Name = "txtEditPW";
             this.txtEditPW.PasswordChar = '\0';
@@ -386,7 +507,7 @@
             // lblEditPW
             // 
             this.lblEditPW.AutoSize = true;
-            this.lblEditPW.Location = new System.Drawing.Point(12, 220);
+            this.lblEditPW.Location = new System.Drawing.Point(12, 185);
             this.lblEditPW.Name = "lblEditPW";
             this.lblEditPW.Size = new System.Drawing.Size(63, 19);
             this.lblEditPW.TabIndex = 25;
@@ -395,7 +516,7 @@
             // lblEditTeachLName
             // 
             this.lblEditTeachLName.AutoSize = true;
-            this.lblEditTeachLName.Location = new System.Drawing.Point(12, 185);
+            this.lblEditTeachLName.Location = new System.Drawing.Point(12, 214);
             this.lblEditTeachLName.Name = "lblEditTeachLName";
             this.lblEditTeachLName.Size = new System.Drawing.Size(100, 19);
             this.lblEditTeachLName.TabIndex = 23;
@@ -515,13 +636,22 @@
             this.txteditFirstName.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txteditFirstName.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
+            // lbleditFirstName
+            // 
+            this.lbleditFirstName.AutoSize = true;
+            this.lbleditFirstName.Location = new System.Drawing.Point(12, 100);
+            this.lbleditFirstName.Name = "lbleditFirstName";
+            this.lbleditFirstName.Size = new System.Drawing.Size(73, 19);
+            this.lbleditFirstName.TabIndex = 15;
+            this.lbleditFirstName.Text = "First Name";
+            // 
             // txtSearch
             // 
             // 
             // 
             // 
             this.txtSearch.CustomButton.Image = null;
-            this.txtSearch.CustomButton.Location = new System.Drawing.Point(158, 1);
+            this.txtSearch.CustomButton.Location = new System.Drawing.Point(174, 1);
             this.txtSearch.CustomButton.Name = "";
             this.txtSearch.CustomButton.Size = new System.Drawing.Size(21, 21);
             this.txtSearch.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -531,7 +661,7 @@
             this.txtSearch.CustomButton.Visible = false;
             this.txtSearch.Lines = new string[] {
         "Search by Student Last Name"};
-            this.txtSearch.Location = new System.Drawing.Point(118, 298);
+            this.txtSearch.Location = new System.Drawing.Point(566, 304);
             this.txtSearch.MaxLength = 32767;
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.PasswordChar = '\0';
@@ -540,7 +670,7 @@
             this.txtSearch.SelectionLength = 0;
             this.txtSearch.SelectionStart = 0;
             this.txtSearch.ShortcutsEnabled = true;
-            this.txtSearch.Size = new System.Drawing.Size(180, 23);
+            this.txtSearch.Size = new System.Drawing.Size(196, 23);
             this.txtSearch.TabIndex = 6;
             this.txtSearch.Text = "Search by Student Last Name";
             this.txtSearch.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -572,142 +702,31 @@
             // 
             this.pWDBTableAdapter1.ClearBeforeFill = true;
             // 
-            // metroButton1
+            // studentTeacherDataSet
             // 
-            this.metroButton1.Location = new System.Drawing.Point(97, 257);
-            this.metroButton1.Name = "metroButton1";
-            this.metroButton1.Size = new System.Drawing.Size(96, 23);
-            this.metroButton1.TabIndex = 36;
-            this.metroButton1.Text = "Refresh";
-            this.metroButton1.UseSelectable = true;
-            this.metroButton1.Click += new System.EventHandler(this.metroButton1_Click_1);
+            this.studentTeacherDataSet.DataSetName = "StudentTeacherDataSet";
+            this.studentTeacherDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // picAdd
+            // studentBindingSource
             // 
-            this.picAdd.BackgroundImage = global::MHL.Properties.Resources.AddS;
-            this.picAdd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.picAdd.Location = new System.Drawing.Point(9, 13);
-            this.picAdd.Name = "picAdd";
-            this.picAdd.Size = new System.Drawing.Size(66, 66);
-            this.picAdd.TabIndex = 37;
-            this.picAdd.UseSelectable = true;
-            this.picAdd.Click += new System.EventHandler(this.metroButton2_Click_1);
+            this.studentBindingSource.DataMember = "Student";
+            this.studentBindingSource.DataSource = this.studentTeacherDataSet;
             // 
-            // lbleditFirstName
+            // studentTableAdapter
             // 
-            this.lbleditFirstName.AutoSize = true;
-            this.lbleditFirstName.Location = new System.Drawing.Point(12, 100);
-            this.lbleditFirstName.Name = "lbleditFirstName";
-            this.lbleditFirstName.Size = new System.Drawing.Size(73, 19);
-            this.lbleditFirstName.TabIndex = 15;
-            this.lbleditFirstName.Text = "First Name";
+            this.studentTableAdapter.ClearBeforeFill = true;
             // 
-            // picDel
+            // studentTeacherDataSetBindingSource
             // 
-            this.picDel.BackgroundImage = global::MHL.Properties.Resources.DeleteS;
-            this.picDel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.picDel.Enabled = false;
-            this.picDel.Location = new System.Drawing.Point(232, 13);
-            this.picDel.Name = "picDel";
-            this.picDel.Size = new System.Drawing.Size(66, 66);
-            this.picDel.TabIndex = 39;
-            this.picDel.UseSelectable = true;
-            // 
-            // picSave
-            // 
-            this.picSave.BackgroundImage = global::MHL.Properties.Resources.SaveS;
-            this.picSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.picSave.Enabled = false;
-            this.picSave.Location = new System.Drawing.Point(118, 13);
-            this.picSave.Name = "picSave";
-            this.picSave.Size = new System.Drawing.Size(66, 66);
-            this.picSave.TabIndex = 40;
-            this.picSave.UseSelectable = true;
-            this.picSave.Click += new System.EventHandler(this.picSave_Click_1);
-            // 
-            // Column1
-            // 
-            this.Column1.DataPropertyName = "UserID";
-            this.Column1.HeaderText = "User ID";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.ToolTipText = "User ID";
-            this.Column1.Visible = false;
-            // 
-            // firstNAMEDataGridViewTextBoxColumn
-            // 
-            this.firstNAMEDataGridViewTextBoxColumn.DataPropertyName = "FirstNAME";
-            this.firstNAMEDataGridViewTextBoxColumn.HeaderText = "Student";
-            this.firstNAMEDataGridViewTextBoxColumn.MinimumWidth = 100;
-            this.firstNAMEDataGridViewTextBoxColumn.Name = "firstNAMEDataGridViewTextBoxColumn";
-            this.firstNAMEDataGridViewTextBoxColumn.ToolTipText = "Student First Name";
-            // 
-            // lastNAMEDataGridViewTextBoxColumn
-            // 
-            this.lastNAMEDataGridViewTextBoxColumn.DataPropertyName = "LastNAME";
-            this.lastNAMEDataGridViewTextBoxColumn.HeaderText = "Last Name";
-            this.lastNAMEDataGridViewTextBoxColumn.MinimumWidth = 100;
-            this.lastNAMEDataGridViewTextBoxColumn.Name = "lastNAMEDataGridViewTextBoxColumn";
-            this.lastNAMEDataGridViewTextBoxColumn.ToolTipText = "Student Last Name";
-            // 
-            // emailDataGridViewTextBoxColumn
-            // 
-            this.emailDataGridViewTextBoxColumn.DataPropertyName = "Email";
-            this.emailDataGridViewTextBoxColumn.HeaderText = "E-mail";
-            this.emailDataGridViewTextBoxColumn.MinimumWidth = 180;
-            this.emailDataGridViewTextBoxColumn.Name = "emailDataGridViewTextBoxColumn";
-            this.emailDataGridViewTextBoxColumn.ToolTipText = "Emaill Address / Login info";
-            this.emailDataGridViewTextBoxColumn.Width = 180;
-            // 
-            // teacherFirstNameDataGridViewTextBoxColumn
-            // 
-            this.teacherFirstNameDataGridViewTextBoxColumn.DataPropertyName = "TeacherFirstName";
-            this.teacherFirstNameDataGridViewTextBoxColumn.HeaderText = "Teacher";
-            this.teacherFirstNameDataGridViewTextBoxColumn.MinimumWidth = 100;
-            this.teacherFirstNameDataGridViewTextBoxColumn.Name = "teacherFirstNameDataGridViewTextBoxColumn";
-            this.teacherFirstNameDataGridViewTextBoxColumn.ToolTipText = "Teacher First Name";
-            // 
-            // teacherLastNameDataGridViewTextBoxColumn
-            // 
-            this.teacherLastNameDataGridViewTextBoxColumn.DataPropertyName = "TeacherLastName";
-            this.teacherLastNameDataGridViewTextBoxColumn.HeaderText = "Last Name";
-            this.teacherLastNameDataGridViewTextBoxColumn.MinimumWidth = 100;
-            this.teacherLastNameDataGridViewTextBoxColumn.Name = "teacherLastNameDataGridViewTextBoxColumn";
-            this.teacherLastNameDataGridViewTextBoxColumn.ToolTipText = "Teacher Last Name";
-            // 
-            // passwordDataGridViewTextBoxColumn
-            // 
-            this.passwordDataGridViewTextBoxColumn.DataPropertyName = "Password";
-            this.passwordDataGridViewTextBoxColumn.HeaderText = "Password";
-            this.passwordDataGridViewTextBoxColumn.MinimumWidth = 80;
-            this.passwordDataGridViewTextBoxColumn.Name = "passwordDataGridViewTextBoxColumn";
-            this.passwordDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // Admin
-            // 
-            this.Admin.DataPropertyName = "Admin";
-            this.Admin.HeaderText = "Admin";
-            this.Admin.MinimumWidth = 55;
-            this.Admin.Name = "Admin";
-            this.Admin.ToolTipText = "Admin Rights?";
-            this.Admin.Width = 55;
-            // 
-            // chkIsAdmin
-            // 
-            this.chkIsAdmin.AutoSize = true;
-            this.chkIsAdmin.Location = new System.Drawing.Point(21, 261);
-            this.chkIsAdmin.Name = "chkIsAdmin";
-            this.chkIsAdmin.Size = new System.Drawing.Size(59, 15);
-            this.chkIsAdmin.TabIndex = 41;
-            this.chkIsAdmin.Text = "Admin";
-            this.chkIsAdmin.UseSelectable = true;
+            this.studentTeacherDataSetBindingSource.DataSource = this.studentTeacherDataSet;
+            this.studentTeacherDataSetBindingSource.Position = 0;
             // 
             // MLH
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = MetroFramework.Forms.MetroFormBorderStyle.FixedSingle;
-            this.ClientSize = new System.Drawing.Size(1112, 388);
+            this.ClientSize = new System.Drawing.Size(896, 388);
             this.Controls.Add(this.lblHeader);
             this.Controls.Add(this.tabMain);
             this.Cursor = System.Windows.Forms.Cursors.Default;
@@ -724,8 +743,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabAddEdit.ResumeLayout(false);
             this.tabAddEdit.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.metroGrid1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.getAllDataBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.studentTeacherDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.studentBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.studentTeacherDataSetBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -764,7 +786,6 @@
         private System.Windows.Forms.BindingSource getAllDataBindingSource;
         private PWDBDataSetTableAdapters.GetAllDataTableAdapter getAllDataTableAdapter;
         private System.Windows.Forms.DataGridViewTextBoxColumn UserIDDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.Button button1;
         private PWDBDataSetTableAdapters.PWDBTableAdapter pWDBTableAdapter1;
         private MetroFramework.Controls.MetroButton metroButton1;
@@ -772,15 +793,15 @@
         private MetroFramework.Controls.MetroLabel lbleditFirstName;
         private MetroFramework.Controls.MetroButton picDel;
         private MetroFramework.Controls.MetroButton picSave;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn firstNAMEDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn lastNAMEDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn emailDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn teacherFirstNameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn teacherLastNameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn passwordDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Admin;
         private MetroFramework.Controls.MetroCheckBox chkIsAdmin;
+        private StudentTeacherDataSet studentTeacherDataSet;
+        private System.Windows.Forms.BindingSource studentBindingSource;
+        private StudentTeacherDataSetTableAdapters.StudentTableAdapter studentTableAdapter;
+        private MetroFramework.Controls.MetroGrid metroGrid1;
+        private System.Windows.Forms.BindingSource studentTeacherDataSetBindingSource;
+        private System.Windows.Forms.RadioButton rdoStudentInfo;
+        private System.Windows.Forms.RadioButton rdoTeacherInfo;
+        private MetroFramework.Controls.MetroButton picEdit;
     }
 }
 

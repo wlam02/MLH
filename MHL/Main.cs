@@ -19,7 +19,7 @@ namespace MHL
     {
         SqlConnection _sqlCon = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|dbFile\PWDB.mdf;Integrated Security=True;Connect Timeout=30");
         int UserID = 0;
-        string TeacherdropSelectCommand = "select TeacherLastName from PWDB group by TeacherLastName";
+        string TeacherdropSelectCommand = "select TeacherLastName from Teachers group by TeacherLastName";
         public MLH()
         {
             InitializeComponent();
@@ -27,16 +27,25 @@ namespace MHL
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            FillDataGridView("");
-            dataGridView.Columns[0].Visible = false; //Hides Student ID columns
-            /*dataGridView.RemoveEmptyColumns(); *///Remove Empty Columns
-            FillDropDownList(TeacherdropSelectCommand, comboTeacherLastName, _sqlCon); // Group Teacher name
-            FillDropDownList(TeacherdropSelectCommand, comboTeacherName, _sqlCon); //Group Teacher by Name for Add Form
-            FillNameDropDownList(("Select LastName from PWDB Where TeacherLastName = " + "'" + comboTeacherName.Text + "'"), ComboName, _sqlCon);
+            {// Fill DataGrid with Default Student information
+                FillDataGrid("StudentData");
+                FormatDataGridHeader("Student");
+            }
+            {//Populate Drop down menus for Main and Admin Tabs
+                FillDropDownList(TeacherdropSelectCommand, comboTeacherLastName, _sqlCon); // Group Teacher name
+                FillDropDownList(TeacherdropSelectCommand, comboTeacherName, _sqlCon); //Group Teacher by Name for Add Form
+                FillNameDropDownList(("Select Student.LastName from Student Inner join Teachers on Student.TeacherID=Teachers.TeacherID Where Teachers.TeacherLastName = " + "'" + comboTeacherName.Text + "'"), ComboName, _sqlCon);
+            }
+            { //Hide Teacher specific controllers to set default mode to Student
+                lblEditTeachLName.Visible = true;
+                comboTeacherLastName.Visible = true;
+                chkIsAdmin.Visible = false;
+            }
         }
 
         private void button2_Click_1(object sender, EventArgs e)
         {
+            //TODO: Need to remove this temp function and add print procedure. 
             hideTab(true);
         }
 
@@ -46,7 +55,7 @@ namespace MHL
             {
                 if (_sqlCon.State == ConnectionState.Closed) //check if the connection is closed
                     _sqlCon.Open();
-                SqlCommand sqlReadPWcmd = new SqlCommand("SELECT Password,Email FROM [PWDB] WHERE [LastNAME] LIKE" + "'" + ComboName.Text.Trim() + "'", _sqlCon);
+                SqlCommand sqlReadPWcmd = new SqlCommand("SELECT Student.Password, Student.Email FROM Student WHERE Student.LastNAME LIKE" + "'" + ComboName.Text.Trim() + "'", _sqlCon);
                 SqlDataReader reader;
                 sqlReadPWcmd.CommandType = CommandType.Text;
                 sqlReadPWcmd.Connection = _sqlCon;
@@ -131,7 +140,7 @@ namespace MHL
             //        sqlCmd.Parameters.AddWithValue("@TeacherLastName", txtEditTeachLName.Text.Trim());
             //        sqlCmd.Parameters.AddWithValue("@Password", txtEditPW.Text.Trim());
             //        sqlCmd.ExecuteNonQuery();
-            //        MessageBox.Show("Added sucsessfully");
+            //        MessageBox.Show("Added Successfully");
             //    }
 
             //}
@@ -197,11 +206,24 @@ namespace MHL
             sqlDa.SelectCommand.Parameters.AddWithValue("@LastNAME", lastName);
             DataTable dtbl = new DataTable();
             sqlDa.Fill(dtbl);
-            dataGridView.DataSource = dtbl;
-            dataGridView.Columns[0].Visible = false; //Hides Student ID columns
+            metroGrid1.DataSource = dtbl;
+            metroGrid1.Columns[0].Visible = false; //Hides Student ID columns
             _sqlCon.Close();
 
         }
+        void FillDataGrid(string UserType)
+        {
+            if (_sqlCon.State == ConnectionState.Closed) //check if the connection is closed
+                _sqlCon.Open();
+            SqlDataAdapter sqlDa = new SqlDataAdapter(UserType, _sqlCon);
+            sqlDa.SelectCommand.CommandType = CommandType.StoredProcedure;            
+            DataTable dtbl = new DataTable();
+            sqlDa.Fill(dtbl);
+            metroGrid1.DataSource = dtbl;
+            metroGrid1.Columns[0].Visible = false; //Hides Student ID columns
+            _sqlCon.Close();
+        }
+
 
         private void metroTextBox1_Click(object sender, EventArgs e)
         {
@@ -233,8 +255,8 @@ namespace MHL
 
         private void btnFrmClear_Click(object sender, EventArgs e)
         {
-            dataGridView.DataSource = null;
-            dataGridView.Refresh();
+            metroGrid1.DataSource = null;
+            metroGrid1.Refresh();
             txteditFirstName.Clear();
             txteditLastName.Clear();
             txteditemail.Clear();
@@ -245,7 +267,7 @@ namespace MHL
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            dataGridView.DataSource = null;
+            metroGrid1.DataSource = null;
             try
             {
                 FillDataGridView(txtSearch.Text.Trim());
@@ -337,17 +359,12 @@ namespace MHL
 
         private void comboTeacherName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            FillNameDropDownList(("Select LastName from PWDB Where TeacherLastName = " + "'" + comboTeacherName.Text + "'"), ComboName, _sqlCon);
+            FillNameDropDownList(("Select Student.LastName from Student Inner join Teachers on Student.TeacherID=Teachers.TeacherID Where Teachers.TeacherLastName = " + "'" + comboTeacherName.Text + "'"), ComboName, _sqlCon);
         }
 
         private void tabMain_Selected(object sender, TabControlEventArgs e)
         {
-
-            dataGridView.Columns[0].Visible = false; //Hides Student ID columns
-                                                     /* dataGridView.RemoveEmptyColumns();*/ //Remove Empty Columns
-            FillDropDownList(TeacherdropSelectCommand, comboTeacherLastName, _sqlCon); // Group Teacher name
-            FillDropDownList(TeacherdropSelectCommand, comboTeacherName, _sqlCon); //Group Teacher by Name for Add Form
-            FillNameDropDownList(("Select LastName from PWDB Where TeacherLastName = " + "'" + comboTeacherName.Text + "'"), ComboName, _sqlCon);
+           
         }
 
         private void dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -412,14 +429,14 @@ namespace MHL
 
         private void dataGridView_DoubleClick(object sender, EventArgs e)
         {
-            if (dataGridView.CurrentRow.Index != -1) //Check if the current datagride is selected 
+            if (metroGrid1.CurrentRow.Index != -1) //Check if the current DataGrid is selected 
             {
-                UserID = Convert.ToInt32(dataGridView.CurrentRow.Cells[0].Value.ToString());
-                txteditFirstName.Text = dataGridView.CurrentRow.Cells[1].Value.ToString();
-                txteditLastName.Text = dataGridView.CurrentRow.Cells[2].Value.ToString();
-                txteditemail.Text = dataGridView.CurrentRow.Cells[3].Value.ToString();
-                comboTeacherLastName.Text = dataGridView.CurrentRow.Cells[5].Value.ToString();
-                txtEditPW.Text = dataGridView.CurrentRow.Cells[6].Value.ToString();
+                UserID = Convert.ToInt32(metroGrid1.CurrentRow.Cells[0].Value.ToString());
+                txteditFirstName.Text = metroGrid1.CurrentRow.Cells[1].Value.ToString();
+                txteditLastName.Text = metroGrid1.CurrentRow.Cells[2].Value.ToString();
+                txteditemail.Text = metroGrid1.CurrentRow.Cells[3].Value.ToString();
+                comboTeacherLastName.Text = metroGrid1.CurrentRow.Cells[5].Value.ToString();
+                txtEditPW.Text = metroGrid1.CurrentRow.Cells[6].Value.ToString();
                 picSave.Enabled = true;
                 picDel.Enabled = true;
             }
@@ -449,8 +466,8 @@ namespace MHL
                         sqlCmd.Parameters.AddWithValue("@Password", txtEditPW.Text.Trim());
                         sqlCmd.Parameters.AddWithValue("@Admin", chkIsAdmin.Checked);
                         sqlCmd.ExecuteNonQuery();
-                        MessageBox.Show("Record Updated Sucsessfully");
-                        FillDataGridView(""); //refresh the datagrid
+                        MessageBox.Show("Record Updated Successfully");
+                        FillDataGridView(""); //refresh the DataGrid
                     }
                 }
                 catch (Exception ex)
@@ -463,6 +480,51 @@ namespace MHL
                     _sqlCon.Close();
                 }
             }
+        }
+
+        private void rdoStudentInfo_CheckedChanged(object sender, EventArgs e)
+        {            
+            FillDataGrid("StudentData");
+            FormatDataGridHeader("Student");
+            lblEditTeachLName.Visible = true;
+            comboTeacherLastName.Visible = true;
+            chkIsAdmin.Visible = false;
+        }
+
+        private void FormatDataGridHeader(string UserType)
+        {
+            metroGrid1.Columns[0].Visible = false; //Hides Student ID columns 
+            metroGrid1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            if (UserType == "Teacher")
+            {
+                metroGrid1.Columns[1].HeaderCell.Value = "First Name";
+                metroGrid1.Columns[2].HeaderCell.Value = "Last Name";
+                metroGrid1.Columns[3].HeaderCell.Value = "Email / Login";
+                metroGrid1.Columns[4].HeaderCell.Value = "Password";
+                metroGrid1.Columns[5].HeaderCell.Value = "Admin";
+            }            
+            else 
+            {
+                metroGrid1.Columns[1].HeaderCell.Value = "First Name";
+                metroGrid1.Columns[2].HeaderCell.Value = "Last Name";
+                metroGrid1.Columns[3].HeaderCell.Value = "Email / Login";
+                metroGrid1.Columns[4].HeaderCell.Value = "Teacher";
+                metroGrid1.Columns[5].HeaderCell.Value = "Password";
+            }
+        }
+
+        private void rdoTeacherInfo_CheckedChanged(object sender, EventArgs e)
+        {
+            FillDataGrid("TeacherData");
+            FormatDataGridHeader("Teacher");
+            lblEditTeachLName.Visible = false;
+            comboTeacherLastName.Visible = false;
+            chkIsAdmin.Visible = true;
+        }
+
+        private void ComboName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
         }
     }      
 }

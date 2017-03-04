@@ -252,8 +252,6 @@
             // 
             // ComboTeacherLN
             // 
-            this.ComboTeacherLN.DataSource = this.pWDBBindingSource;
-            this.ComboTeacherLN.DisplayMember = "TeacherLastName";
             this.ComboTeacherLN.FormattingEnabled = true;
             this.ComboTeacherLN.ItemHeight = 23;
             this.ComboTeacherLN.Location = new System.Drawing.Point(214, 240);
@@ -261,7 +259,7 @@
             this.ComboTeacherLN.Size = new System.Drawing.Size(209, 29);
             this.ComboTeacherLN.TabIndex = 14;
             this.ComboTeacherLN.UseSelectable = true;
-            this.ComboTeacherLN.ValueMember = "TeacherLastName";
+            this.ComboTeacherLN.SelectedIndexChanged += new System.EventHandler(this.ComboTeacherLN_SelectedIndexChanged);
             // 
             // RadioBtnIsStudent
             // 
