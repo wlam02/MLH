@@ -149,12 +149,12 @@ namespace MHL
 
         private void AddTeacher()
         {
-            //    if (string.IsNullOrWhiteSpace(txtAddFName.Text) || string.IsNullOrWhiteSpace(txtAddLName.Text) ||
-            //    string.IsNullOrWhiteSpace(txtAddPW.Text) || string.IsNullOrWhiteSpace(txtAddEmail.Text) || txtAddFName.Text == "Enter Teacher's First Name" || txtAddLName.Text == "Enter Student Last Name" || txtAddPW.Text == "Enter Password" || txtAddEmail.Text == "Enter Studetn E-mail / Login")
-            //{
-            //    MessageBox.Show("Please Fill All Fields");
-            //}
-            //else
+            if (string.IsNullOrWhiteSpace(txtAddFName.Text) || string.IsNullOrWhiteSpace(txtAddLName.Text) ||
+                string.IsNullOrWhiteSpace(txtAddPW.Text) || string.IsNullOrWhiteSpace(txtAddEmail.Text) || txtAddFName.Text == "Enter First Name" || txtAddLName.Text == "Enter Last Name" || txtAddPW.Text == "Enter Password" || txtAddEmail.Text == "Enter Email / Login")
+            {
+                MessageBox.Show("Please Fill All Fields");
+            }
+            else  
             {
                 try
                 {
@@ -163,15 +163,14 @@ namespace MHL
                         sqlcon.Open();
                         SqlCommand sqlCmd = new SqlCommand("AddTeacher", sqlcon);
                         sqlCmd.CommandType = CommandType.StoredProcedure;
-                        sqlCmd.Parameters.AddWithValue("@mode", "Add");
-                        sqlCmd.Parameters.AddWithValue("@UserID", 0);
+                        sqlCmd.Parameters.AddWithValue("@TeacherID", 0);
                         sqlCmd.Parameters.AddWithValue("@Email", txtAddEmail.Text.Trim());
                         sqlCmd.Parameters.AddWithValue("@TeacherLastName", txtAddLName.Text.Trim());
                         sqlCmd.Parameters.AddWithValue("@TeacherFirstName", txtAddFName.Text.Trim());
                         sqlCmd.Parameters.AddWithValue("@Password", txtAddPW.Text.Trim());
                         sqlCmd.Parameters.AddWithValue("@Admin", chkBoxAdmin.Checked);
                         sqlCmd.ExecuteNonQuery();
-                        MessageBox.Show("Saved sucsessfully");
+                        MessageBox.Show("Teacher Record Added Successfully");
                     }
 
                 }
@@ -191,7 +190,7 @@ namespace MHL
         private void AddStudent()
         {
             if (string.IsNullOrWhiteSpace(txtAddFName.Text) || string.IsNullOrWhiteSpace(txtAddLName.Text) ||
-                string.IsNullOrWhiteSpace(txtAddPW.Text) || string.IsNullOrWhiteSpace(txtAddEmail.Text) || txtAddFName.Text == "Enter Student first Name" || txtAddLName.Text == "Enter Student Last Name" || txtAddPW.Text == "Enter Password" || txtAddEmail.Text == "Enter Studetn E-mail / Login")
+                string.IsNullOrWhiteSpace(txtAddPW.Text) || string.IsNullOrWhiteSpace(txtAddEmail.Text) || txtAddFName.Text == "Enter First Name" || txtAddLName.Text == "Enter Last Name" || txtAddPW.Text == "Enter Password" || txtAddEmail.Text == "Enter Email / Login")
             {
                 MessageBox.Show("Please Fill All Fields");
             }
@@ -204,16 +203,14 @@ namespace MHL
                         sqlcon.Open();
                         SqlCommand sqlCmd = new SqlCommand("AddStudent", sqlcon);
                         sqlCmd.CommandType = CommandType.StoredProcedure;
-                        sqlCmd.Parameters.AddWithValue("@mode", "Add");
-                        sqlCmd.Parameters.AddWithValue("@UserID", 0);
+                        sqlCmd.Parameters.AddWithValue("@StudentID", 0);
                         sqlCmd.Parameters.AddWithValue("@FirstName", txtAddFName.Text.Trim());
                         sqlCmd.Parameters.AddWithValue("@LastNAME", txtAddLName.Text.Trim());
                         sqlCmd.Parameters.AddWithValue("@Email", txtAddEmail.Text.Trim());
-                        sqlCmd.Parameters.AddWithValue("@TeacherLastName", ComboTeacherLN.Text.Trim());
+                        sqlCmd.Parameters.AddWithValue("@TeacherID", GetTeacherID(ComboTeacherLN.Text.Trim()));
                         sqlCmd.Parameters.AddWithValue("@Password", txtAddPW.Text.Trim());
-                        sqlCmd.Parameters.AddWithValue("@Admin", 0);
                         sqlCmd.ExecuteNonQuery();
-                        MessageBox.Show("Saved sucsessfully");
+                        MessageBox.Show("Student Record Added Successfully");
                     }
 
                 }
@@ -227,6 +224,7 @@ namespace MHL
                     sqlcon.Close();
                 }
                 this.Close();
+                //TODO: add refresh to main DataGrid
             }
         }
 
@@ -247,6 +245,30 @@ namespace MHL
         private void ComboTeacherLN_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private int GetTeacherID(string TeacherLastName)
+        //This function assumes the data connection is open and does not close it once it done. 
+        //When using this function the connection must be closed by the location it was called from.
+        {
+            int teacherid = 0;
+            try
+            {
+                SqlCommand sqlCmd = new SqlCommand("Select Teachers.TeacherID from Teachers where TeacherLastName ='" + TeacherLastName + "'", sqlcon);
+                sqlCmd.CommandType = CommandType.Text;
+                SqlDataReader reader = sqlCmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    teacherid = reader.GetInt32(0);
+                }
+                reader.Close();
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error Message");
+            }
+            return teacherid;
         }
     }
 }

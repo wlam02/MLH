@@ -27,20 +27,7 @@ namespace MHL
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            {// Fill DataGrid with Default Student information
-                FillDataGrid("StudentData");
-                FormatDataGridHeader("Student");
-            }
-            {//Populate Drop down menus for Main and Admin Tabs
-                FillDropDownList(TeacherdropSelectCommand, comboTeacherLastName, _sqlCon); // Group Teacher name
-                FillDropDownList(TeacherdropSelectCommand, comboTeacherName, _sqlCon); //Group Teacher by Name for Add Form
-                FillNameDropDownList(("Select Student.LastName from Student Inner join Teachers on Student.TeacherID=Teachers.TeacherID Where Teachers.TeacherLastName = " + "'" + comboTeacherName.Text + "'"), ComboName, _sqlCon);
-            }
-            { //Hide Teacher specific controllers to set default mode to Student
-                lblEditTeachLName.Visible = true;
-                comboTeacherLastName.Visible = true;
-                chkIsAdmin.Visible = false;
-            }
+            InitilizeForm();
         }
 
         private void button2_Click_1(object sender, EventArgs e)
@@ -403,7 +390,7 @@ namespace MHL
 
         private void metroButton1_Click_1(object sender, EventArgs e)
         {
-            FillDataGridView("");
+            InitilizeForm();
         }
 
         private void metroButton2_Click_1(object sender, EventArgs e)
@@ -525,6 +512,25 @@ namespace MHL
         private void ComboName_SelectedIndexChanged(object sender, EventArgs e)
         {
             
+        }
+
+        public void InitilizeForm()
+        {
+            {// Fill DataGrid with Default Student information
+                FillDataGrid("StudentData");
+                FormatDataGridHeader("Student");
+            }
+            {//Populate Drop down menus for Main and Admin Tabs
+                FillDropDownList(TeacherdropSelectCommand, comboTeacherLastName, _sqlCon); // Group Teacher name
+                FillDropDownList(TeacherdropSelectCommand, comboTeacherName, _sqlCon); //Group Teacher by Name for Add Form
+                FillNameDropDownList(("Select Student.LastName from Student Inner join Teachers on Student.TeacherID=Teachers.TeacherID Where Teachers.TeacherLastName = " + "'" + comboTeacherName.Text + "'"), ComboName, _sqlCon);
+            }
+            { //Hide Teacher specific controllers to set default mode to Student
+                rdoStudentInfo.Checked = true;
+                lblEditTeachLName.Visible = true;
+                comboTeacherLastName.Visible = true;
+                chkIsAdmin.Visible = false;
+            }
         }
     }      
 }

@@ -112,7 +112,7 @@
             this.tabMain.Location = new System.Drawing.Point(5, 22);
             this.tabMain.Name = "tabMain";
             this.tabMain.SelectedIndex = 0;
-            this.tabMain.Size = new System.Drawing.Size(884, 360);
+            this.tabMain.Size = new System.Drawing.Size(909, 360);
             this.tabMain.TabIndex = 0;
             this.tabMain.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabMain_Selected);
             // 
@@ -295,7 +295,7 @@
             this.tabAddEdit.Location = new System.Drawing.Point(4, 22);
             this.tabAddEdit.Name = "tabAddEdit";
             this.tabAddEdit.Padding = new System.Windows.Forms.Padding(3);
-            this.tabAddEdit.Size = new System.Drawing.Size(876, 334);
+            this.tabAddEdit.Size = new System.Drawing.Size(901, 334);
             this.tabAddEdit.TabIndex = 1;
             this.tabAddEdit.Text = "Admin Control";
             this.tabAddEdit.UseVisualStyleBackColor = true;
@@ -306,7 +306,7 @@
             this.picEdit.BackgroundImage = global::MHL.Properties.Resources.EditS;
             this.picEdit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.picEdit.Enabled = false;
-            this.picEdit.Location = new System.Drawing.Point(93, 13);
+            this.picEdit.Location = new System.Drawing.Point(81, 13);
             this.picEdit.Name = "picEdit";
             this.picEdit.Size = new System.Drawing.Size(66, 66);
             this.picEdit.TabIndex = 43;
@@ -315,7 +315,7 @@
             // rdoTeacherInfo
             // 
             this.rdoTeacherInfo.AutoSize = true;
-            this.rdoTeacherInfo.Location = new System.Drawing.Point(617, 69);
+            this.rdoTeacherInfo.Location = new System.Drawing.Point(647, 19);
             this.rdoTeacherInfo.Name = "rdoTeacherInfo";
             this.rdoTeacherInfo.Size = new System.Drawing.Size(120, 17);
             this.rdoTeacherInfo.TabIndex = 17;
@@ -327,7 +327,7 @@
             // 
             this.rdoStudentInfo.AutoSize = true;
             this.rdoStudentInfo.Checked = true;
-            this.rdoStudentInfo.Location = new System.Drawing.Point(740, 69);
+            this.rdoStudentInfo.Location = new System.Drawing.Point(770, 19);
             this.rdoStudentInfo.Name = "rdoStudentInfo";
             this.rdoStudentInfo.Size = new System.Drawing.Size(117, 17);
             this.rdoStudentInfo.TabIndex = 16;
@@ -368,7 +368,7 @@
             this.metroGrid1.EnableHeadersVisualStyles = false;
             this.metroGrid1.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.metroGrid1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.metroGrid1.Location = new System.Drawing.Point(320, 92);
+            this.metroGrid1.Location = new System.Drawing.Point(304, 42);
             this.metroGrid1.Name = "metroGrid1";
             this.metroGrid1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -381,7 +381,7 @@
             this.metroGrid1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.metroGrid1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.metroGrid1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.metroGrid1.Size = new System.Drawing.Size(550, 206);
+            this.metroGrid1.Size = new System.Drawing.Size(591, 256);
             this.metroGrid1.TabIndex = 42;
             // 
             // chkIsAdmin
@@ -399,7 +399,7 @@
             this.picSave.BackgroundImage = global::MHL.Properties.Resources.SaveS;
             this.picSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.picSave.Enabled = false;
-            this.picSave.Location = new System.Drawing.Point(181, 13);
+            this.picSave.Location = new System.Drawing.Point(153, 13);
             this.picSave.Name = "picSave";
             this.picSave.Size = new System.Drawing.Size(66, 66);
             this.picSave.TabIndex = 40;
@@ -411,7 +411,7 @@
             this.picDel.BackgroundImage = global::MHL.Properties.Resources.DeleteS;
             this.picDel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.picDel.Enabled = false;
-            this.picDel.Location = new System.Drawing.Point(273, 13);
+            this.picDel.Location = new System.Drawing.Point(232, 13);
             this.picDel.Name = "picDel";
             this.picDel.Size = new System.Drawing.Size(66, 66);
             this.picDel.TabIndex = 39;
@@ -726,7 +726,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = MetroFramework.Forms.MetroFormBorderStyle.FixedSingle;
-            this.ClientSize = new System.Drawing.Size(896, 388);
+            this.ClientSize = new System.Drawing.Size(918, 388);
             this.Controls.Add(this.lblHeader);
             this.Controls.Add(this.tabMain);
             this.Cursor = System.Windows.Forms.Cursors.Default;

@@ -69,7 +69,7 @@
             this.txtAddFName.CustomButton.UseSelectable = true;
             this.txtAddFName.CustomButton.Visible = false;
             this.txtAddFName.Lines = new string[] {
-        "Enter Student first Name"};
+        "Enter First Name"};
             this.txtAddFName.Location = new System.Drawing.Point(214, 67);
             this.txtAddFName.MaxLength = 32767;
             this.txtAddFName.Name = "txtAddFName";
@@ -81,7 +81,7 @@
             this.txtAddFName.ShortcutsEnabled = true;
             this.txtAddFName.Size = new System.Drawing.Size(209, 23);
             this.txtAddFName.TabIndex = 1;
-            this.txtAddFName.Text = "Enter Student first Name";
+            this.txtAddFName.Text = "Enter First Name";
             this.txtAddFName.UseSelectable = true;
             this.txtAddFName.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtAddFName.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
@@ -139,7 +139,7 @@
             this.txtAddLName.CustomButton.UseSelectable = true;
             this.txtAddLName.CustomButton.Visible = false;
             this.txtAddLName.Lines = new string[] {
-        "Enter Student Last Name"};
+        "Enter Last Name"};
             this.txtAddLName.Location = new System.Drawing.Point(214, 112);
             this.txtAddLName.MaxLength = 32767;
             this.txtAddLName.Name = "txtAddLName";
@@ -151,7 +151,7 @@
             this.txtAddLName.ShortcutsEnabled = true;
             this.txtAddLName.Size = new System.Drawing.Size(209, 23);
             this.txtAddLName.TabIndex = 7;
-            this.txtAddLName.Text = "Enter Student Last Name";
+            this.txtAddLName.Text = "Enter Last Name";
             this.txtAddLName.UseSelectable = true;
             this.txtAddLName.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtAddLName.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
@@ -172,7 +172,7 @@
             this.txtAddEmail.CustomButton.UseSelectable = true;
             this.txtAddEmail.CustomButton.Visible = false;
             this.txtAddEmail.Lines = new string[] {
-        "Enter Studetn E-mail / Login"};
+        "Enter Email / Login"};
             this.txtAddEmail.Location = new System.Drawing.Point(214, 157);
             this.txtAddEmail.MaxLength = 32767;
             this.txtAddEmail.Name = "txtAddEmail";
@@ -184,7 +184,7 @@
             this.txtAddEmail.ShortcutsEnabled = true;
             this.txtAddEmail.Size = new System.Drawing.Size(209, 23);
             this.txtAddEmail.TabIndex = 8;
-            this.txtAddEmail.Text = "Enter Studetn E-mail / Login";
+            this.txtAddEmail.Text = "Enter Email / Login";
             this.txtAddEmail.UseSelectable = true;
             this.txtAddEmail.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtAddEmail.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
